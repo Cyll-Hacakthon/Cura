@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -30,11 +30,28 @@ import {customFont} from './util';
 import {useFonts} from 'expo-font';
 
 import SplashScreen from './components/splashScreen/SplashScreen';
+import HomeScreen from './components/homeScreen/HomeScreen';
+import ForumScreen from './components/forumScreen/ForumScreen';
+import SettingScreen from './components/settingScreen/SettingScreen';
+import TakeNumberScreen from './components/takeNumberScreen/TakeNumberScreen';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
+  const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
+  const [screen, setScreen] = useState('Forum');
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeFinishLoad(true);
+    }, 3000);
+  }, []);
+
   let [fontsLoaded] = useFonts(customFont);
+
+  const handleNavigate = (screen: string) => {
+    setScreen(screen);
+  };
 
   if (!fontsLoaded) {
     return (
@@ -43,11 +60,22 @@ const App = () => {
       </View>
     );
   } else {
-    return (
-      <>
-        <SplashScreen />
-      </>
-    );
+    {
+      if (!TimeFinishLoad) {
+        return <SplashScreen />;
+      } else {
+        switch (screen) {
+          case 'Home':
+            return <HomeScreen />;
+          case 'Forum':
+            return <ForumScreen />;
+          case 'Take a number':
+            return <TakeNumberScreen />;
+          case 'Setting':
+            return <SettingScreen />;
+        }
+      }
+    }
   }
 };
 
