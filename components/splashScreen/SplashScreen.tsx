@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {CuraColor, customFont} from '../../util';
+import {CuraColor} from '../../util';
 
 declare const global: {HermesInternal: null | {}};
 
