@@ -39,7 +39,7 @@ declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
-  const [screen, setScreen] = useState('Forum');
+  const [screen, setScreen] = useState<ENavigation>(ENavigation.FORUM);
 
   useEffect(() => {
     setTimeout(() => {
@@ -49,7 +49,7 @@ const App = () => {
 
   let [fontsLoaded] = useFonts(customFont);
 
-  const handleNavigate = (screen: string) => {
+  const handleNavigate = (screen: ENavigation) => {
     setScreen(screen);
   };
 
@@ -65,13 +65,13 @@ const App = () => {
         return <SplashScreen />;
       } else {
         switch (screen) {
-          case 'Home':
+          case ENavigation.HOME:
             return <HomeScreen />;
-          case 'Forum':
+          case ENavigation.FORUM:
             return <ForumScreen />;
-          case 'Take a number':
+          case ENavigation.TAKE_NUMBER:
             return <TakeNumberScreen />;
-          case 'Setting':
+          case ENavigation.SETTING:
             return <SettingScreen />;
         }
       }
@@ -80,3 +80,10 @@ const App = () => {
 };
 
 export default App;
+
+enum ENavigation {
+  HOME = 'Home',
+  FORUM = 'Deleted',
+  TAKE_NUMBER = 'TakeNumber',
+  SETTING = 'Setting',
+}
