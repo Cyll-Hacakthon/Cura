@@ -26,16 +26,29 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {customFont} from './util';
+import {useFonts} from 'expo-font';
+
 import SplashScreen from './components/splashScreen/SplashScreen';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
-  return (
-    <>
-      <SplashScreen />
-    </>
-  );
+  let [fontsLoaded] = useFonts(customFont);
+
+  if (!fontsLoaded) {
+    return (
+      <View>
+        <Text>Loading Wait sia</Text>
+      </View>
+    );
+  } else {
+    return (
+      <>
+        <SplashScreen />
+      </>
+    );
+  }
 };
 
 export default App;

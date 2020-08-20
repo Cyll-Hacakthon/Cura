@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {CuraColor} from '../../util';
+import {CuraColor, customFont} from '../../util';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -36,12 +36,13 @@ const curaStyle = StyleSheet.create({
   },
   title: {
     fontSize: 80,
-    fontFamily: 'Rubik',
     color: Colors.white,
+    fontFamily: 'Rubik',
   },
   subtitle: {
     fontSize: 20,
     color: Colors.white,
+    fontFamily: 'Rubik',
   },
 });
 
