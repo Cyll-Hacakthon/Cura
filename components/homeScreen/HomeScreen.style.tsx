@@ -17,6 +17,7 @@ export default StyleSheet.create({
     borderBottomRightRadius: 60,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 0,
   },
   welcomeWord: {
     fontFamily: 'Rubik',
@@ -29,8 +30,8 @@ export default StyleSheet.create({
   },
   nameBox: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '90%',
+    justifyContent: 'space-between',
+    width: '85%',
   },
   content: {},
 });
