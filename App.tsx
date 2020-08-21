@@ -29,10 +29,10 @@ import {
 import {customFont} from './util';
 import {useFonts} from 'expo-font';
 
-import SplashScreen from './components/splashScreen/SplashScreen';
-import HomeScreen from './components/homeScreen/HomeScreen';
-import ForumScreen from './components/forumScreen/ForumScreen';
-import SettingScreen from './components/settingScreen/SettingScreen';
+import SplashScreen from './components/SplashScreen/SplashScreen';
+import HomeScreen from './components/HomeScreen/HomeScreen';
+import ForumScreen from './components/ForumScreen/ForumScreen';
+import SettingScreen from './components/SettingScreen/SettingScreen';
 import TakeNumberScreen from './components/takeNumberScreen/TakeNumberScreen';
 
 declare const global: {HermesInternal: null | {}};
@@ -53,7 +53,7 @@ const App = () => {
     setScreen(screen);
   };
 
-  if (!fontsLoaded && !TimeFinishLoad) {
+  if (fontsLoaded && !TimeFinishLoad) {
     return <SplashScreen />;
   } else {
     switch (screen) {
@@ -71,7 +71,7 @@ const App = () => {
 
 export default App;
 
-enum ENavigation {
+export enum ENavigation {
   HOME = 'Home',
   FORUM = 'Deleted',
   TAKE_NUMBER = 'TakeNumber',

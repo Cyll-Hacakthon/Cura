@@ -4,6 +4,7 @@ import Expo from 'expo';
 export const CuraColor = {
   DarkGreen: '#09835E',
   Green: '#2EF442',
+  White: '#FFFFFF',
 };
 
 export const customFont = {
