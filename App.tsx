@@ -39,7 +39,7 @@ declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
-  const [screen, setScreen] = useState<ENavigation>(ENavigation.FORUM);
+  const [screen, setScreen] = useState<ENavigation>(ENavigation.HOME);
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,28 +53,18 @@ const App = () => {
     setScreen(screen);
   };
 
-  if (!fontsLoaded) {
-    return (
-      <View>
-        <Text>Loading Wait sia</Text>
-      </View>
-    );
+  if (!fontsLoaded && !TimeFinishLoad) {
+    return <SplashScreen />;
   } else {
-    {
-      if (!TimeFinishLoad) {
-        return <SplashScreen />;
-      } else {
-        switch (screen) {
-          case ENavigation.HOME:
-            return <HomeScreen />;
-          case ENavigation.FORUM:
-            return <ForumScreen />;
-          case ENavigation.TAKE_NUMBER:
-            return <TakeNumberScreen />;
-          case ENavigation.SETTING:
-            return <SettingScreen />;
-        }
-      }
+    switch (screen) {
+      case ENavigation.HOME:
+        return <HomeScreen />;
+      case ENavigation.FORUM:
+        return <ForumScreen />;
+      case ENavigation.TAKE_NUMBER:
+        return <TakeNumberScreen />;
+      case ENavigation.SETTING:
+        return <SettingScreen />;
     }
   }
 };
