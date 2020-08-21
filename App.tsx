@@ -35,6 +35,8 @@ import ForumScreen from './components/ForumScreen/ForumScreen';
 import SettingScreen from './components/SettingScreen/SettingScreen';
 import TakeNumberScreen from './components/takeNumberScreen/TakeNumberScreen';
 
+import ENavigation from './components/NavBar/NavEnum';
+
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
@@ -58,7 +60,7 @@ const App = () => {
   } else {
     switch (screen) {
       case ENavigation.HOME:
-        return <HomeScreen />;
+        return <HomeScreen setScreen={setScreen} />;
       case ENavigation.FORUM:
         return <ForumScreen />;
       case ENavigation.TAKE_NUMBER:
@@ -70,10 +72,3 @@ const App = () => {
 };
 
 export default App;
-
-export enum ENavigation {
-  HOME = 'Home',
-  FORUM = 'Deleted',
-  TAKE_NUMBER = 'TakeNumber',
-  SETTING = 'Setting',
-}

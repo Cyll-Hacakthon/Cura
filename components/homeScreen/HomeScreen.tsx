@@ -4,7 +4,11 @@ import {StyleSheet, View, Text} from 'react-native';
 import {CuraColor} from '../../util';
 import Navbar from '../NavBar/NavBar';
 
-const HomeScreen = () => {
+interface IProps {
+  setScreen: Function;
+}
+
+const HomeScreen = (props: IProps) => {
   return (
     <>
       <View style={curaStyle.container}>
@@ -12,7 +16,7 @@ const HomeScreen = () => {
           <Text>Home Page</Text>
         </View>
         <View style={curaStyle.navbar}>
-          <Navbar />
+          <Navbar setScreen={props.setScreen} />
         </View>
       </View>
     </>
