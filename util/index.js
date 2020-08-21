@@ -1,9 +1,9 @@
 import Font from 'expo-font';
-import Expo from 'expo';
 
 export const CuraColor = {
   DarkGreen: '#09835E',
-  Green: '#2EF442',
+  LightGreen: '#2EF442',
+  Green: '#00E05A',
   White: '#FFFFFF',
 };
 

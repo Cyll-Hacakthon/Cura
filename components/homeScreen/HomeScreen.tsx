@@ -1,43 +1,46 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 
-import {CuraColor} from '../../util';
 import Navbar from '../NavBar/NavBar';
+import Style from './HomeScreen.style';
 
 interface IProps {
   handleNavigation: Function;
 }
 
 const HomeScreen = (props: IProps) => {
+  const NameBox = () => {
+    return (
+      <View style={Style.nameBox}>
+        <View>
+          <View>
+            <Text style={Style.welcomeWord}>Welcome Back,</Text>
+          </View>
+          <View>
+            <Text style={Style.userName}>Wendy Moe</Text>
+          </View>
+        </View>
+        <View>
+          <Text>Test</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <>
-      <View style={curaStyle.container}>
-        <View style={curaStyle.content}>
-          <Text>Home Page</Text>
-        </View>
-        <View style={curaStyle.navbar}>
+      <View style={Style.container}>
+        <ScrollView style={Style.content}>
+          <View style={Style.topBox}>
+            <NameBox />
+          </View>
+        </ScrollView>
+        <View style={Style.navbar}>
           <Navbar handleNavigation={props.handleNavigation} />
         </View>
       </View>
     </>
   );
 };
-
-const curaStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: CuraColor.DarkGreen,
-    color: CuraColor.White,
-  },
-  navbar: {
-    flex: 0.1,
-  },
-  content: {
-    flex: 0.9,
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: CuraColor.White,
-  },
-});
 
 export default HomeScreen;
