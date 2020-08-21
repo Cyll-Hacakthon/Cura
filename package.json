@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.2.0",
     "expo": "^38.0.9",
     "expo-font": "^8.2.2",
     "react": "16.13.1",

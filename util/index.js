@@ -1,5 +1,3 @@
-import Font from 'expo-font';
-
 export const CuraColor = {
   DarkGreen: '#09835E',
   LightGreen: '#2EF442',
@@ -9,12 +7,5 @@ export const CuraColor = {
 
 export const customFont = {
   Rubik: require('../assets/fonts/Rubik-Regular.ttf'),
-};
-
-export const loadCustomFonts = async () => {
-  try {
-    await Font.loadAsync(customFont);
-  } catch (error) {
-    console.log(error);
-  }
+  IonIcons: require('../assets/fonts/ionicons.ttf'),
 };
