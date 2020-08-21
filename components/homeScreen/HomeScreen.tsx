@@ -5,7 +5,7 @@ import {CuraColor} from '../../util';
 import Navbar from '../NavBar/NavBar';
 
 interface IProps {
-  setScreen: Function;
+  handleNavigation: Function;
 }
 
 const HomeScreen = (props: IProps) => {
@@ -16,7 +16,7 @@ const HomeScreen = (props: IProps) => {
           <Text>Home Page</Text>
         </View>
         <View style={curaStyle.navbar}>
-          <Navbar setScreen={props.setScreen} />
+          <Navbar handleNavigation={props.handleNavigation} />
         </View>
       </View>
     </>

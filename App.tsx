@@ -51,16 +51,12 @@ const App = () => {
 
   let [fontsLoaded] = useFonts(customFont);
 
-  const handleNavigate = (screen: ENavigation) => {
-    setScreen(screen);
-  };
-
   if (fontsLoaded && !TimeFinishLoad) {
     return <SplashScreen />;
   } else {
     switch (screen) {
       case ENavigation.HOME:
-        return <HomeScreen setScreen={setScreen} />;
+        return <HomeScreen handleNavigation={setScreen} />;
       case ENavigation.FORUM:
         return <ForumScreen />;
       case ENavigation.TAKE_NUMBER:

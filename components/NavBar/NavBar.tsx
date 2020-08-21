@@ -5,13 +5,13 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 interface IProp {
   active?: ENavigation;
-  setScreen: Function;
+  handleNavigation: Function;
 }
 
 const NavBar = (props: IProp) => {
   const navigate = (page: ENavigation) => {
     return () => {
-      props.setScreen(page);
+      props.handleNavigation(page);
     };
   };
 
