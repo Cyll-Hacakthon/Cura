@@ -19,7 +19,7 @@ const NavBar = (props: IProp) => {
   const NavigateButton = (props: {destination: ENavigation}) => {
     return (
       <TouchableOpacity onPress={navigate(props.destination)}>
-        <Text>{props.destination}</Text>
+        <Text style={Style.navText}>{props.destination}</Text>
       </TouchableOpacity>
     );
   };

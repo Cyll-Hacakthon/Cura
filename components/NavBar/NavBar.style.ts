@@ -9,4 +9,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  navText: {
+    color: CuraColor.White,
+  },
 });

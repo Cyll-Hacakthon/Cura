@@ -33,5 +33,16 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     width: '85%',
   },
-  content: {},
+  userImage: {
+    width: 50,
+    height: 50,
+    backgroundColor: CuraColor.White,
+    borderRadius: 5,
+    alignSelf: 'flex-end',
+  },
+  userImageBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

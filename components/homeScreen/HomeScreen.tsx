@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 
 import Navbar from '../NavBar/NavBar';
 import Style from './HomeScreen.style';
+
+const userImage = require('../../assets/images/gitlab-logo.png');
 
 interface IProps {
   handleNavigation: Function;
@@ -20,8 +22,8 @@ const HomeScreen = (props: IProps) => {
             <Text style={Style.userName}>Wendy Moe</Text>
           </View>
         </View>
-        <View>
-          <Text>Test</Text>
+        <View style={Style.userImageBox}>
+          <Image style={Style.userImage} source={userImage}></Image>
         </View>
       </View>
     );
@@ -30,7 +32,7 @@ const HomeScreen = (props: IProps) => {
   return (
     <>
       <View style={Style.container}>
-        <ScrollView style={Style.content}>
+        <ScrollView>
           <View style={Style.topBox}>
             <NameBox />
           </View>
