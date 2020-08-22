@@ -16,20 +16,20 @@ const NavBar = (props: IProp) => {
     };
   };
 
-  const NavigateButton = (props: {page: ENavigation}) => {
+  const NavigateButton = (props: {destination: ENavigation}) => {
     return (
-      <TouchableOpacity onPress={navigate(props.page)}>
-        <Text>{props.page}</Text>
+      <TouchableOpacity onPress={navigate(props.destination)}>
+        <Text>{props.destination}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={Style.container}>
-      <NavigateButton page={ENavigation.HOME} />
-      <NavigateButton page={ENavigation.FORUM} />
-      <NavigateButton page={ENavigation.TAKE_NUMBER} />
-      <NavigateButton page={ENavigation.SETTING} />
+      <NavigateButton destination={ENavigation.HOME} />
+      <NavigateButton destination={ENavigation.FORUM} />
+      <NavigateButton destination={ENavigation.TAKE_NUMBER} />
+      <NavigateButton destination={ENavigation.SETTING} />
     </View>
   );
 };
