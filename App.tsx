@@ -9,30 +9,14 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import {customFont} from './util';
+import {AppLoading} from 'expo';
 import {useFonts} from 'expo-font';
 
-import SplashScreen from './components/SplashScreen/SplashScreen';
-import HomeScreen from './components/HomeScreen/HomeScreen';
-import ForumScreen from './components/ForumScreen/ForumScreen';
-import SettingScreen from './components/SettingScreen/SettingScreen';
+import SplashScreen from './components/splashScreen/SplashScreen';
+import HomeScreen from './components/homeScreen/HomeScreen';
+import ForumScreen from './components/forumScreen/ForumScreen';
+import SettingScreen from './components/settingScreen/SettingScreen';
 import TakeNumberScreen from './components/takeNumberScreen/TakeNumberScreen';
 
 import ENavigation from './components/NavBar/NavEnum';
@@ -40,6 +24,7 @@ import ENavigation from './components/NavBar/NavEnum';
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
+  const [loadFont] = useFonts(customFont);
   const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
   const [screen, setScreen] = useState<ENavigation>(ENavigation.HOME);
 
@@ -49,21 +34,23 @@ const App = () => {
     }, 3000);
   }, []);
 
-  let [fontsLoaded] = useFonts(customFont);
-
-  if (fontsLoaded && !TimeFinishLoad) {
-    return <SplashScreen />;
-  } else {
-    switch (screen) {
-      case ENavigation.HOME:
-        return <HomeScreen handleNavigation={setScreen} />;
-      case ENavigation.FORUM:
-        return <ForumScreen />;
-      case ENavigation.TAKE_NUMBER:
-        return <TakeNumberScreen />;
-      case ENavigation.SETTING:
-        return <SettingScreen />;
+  if (loadFont) {
+    if (!TimeFinishLoad) {
+      return <SplashScreen />;
+    } else {
+      switch (screen) {
+        case ENavigation.HOME:
+          return <HomeScreen handleNavigation={setScreen} />;
+        case ENavigation.FORUM:
+          return <ForumScreen handleNavigation={setScreen} />;
+        case ENavigation.TAKE_NUMBER:
+          return <TakeNumberScreen />;
+        case ENavigation.SETTING:
+          return <SettingScreen />;
+      }
     }
+  } else {
+    return <AppLoading />;
   }
 };
 

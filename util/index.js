@@ -9,3 +9,11 @@ export const customFont = {
   Rubik: require('../assets/fonts/Rubik-Regular.ttf'),
   IonIcons: require('../assets/fonts/ionicons.ttf'),
 };
+
+export const Font = {
+  Heading3: {
+    fontFamily: 'Rubik',
+    fontSize: 31,
+    lineHeight: 39,
+  },
+};

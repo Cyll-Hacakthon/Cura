@@ -1,13 +1,21 @@
 import React from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
+import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
 
 import Navbar from '../NavBar/NavBar';
 import Style from './HomeScreen.style';
+import {LinearGradient} from 'expo-linear-gradient';
+import {Font} from '../../util';
+import {MaterialIcons} from '@expo/vector-icons';
 
 const userImage = require('../../assets/images/gitlab-logo.png');
 
 interface IProps {
   handleNavigation: Function;
+}
+
+interface IPropsSelect {
+  recordType: string;
+  iconType: string;
 }
 
 const HomeScreen = (props: IProps) => {
@@ -29,12 +37,37 @@ const HomeScreen = (props: IProps) => {
     );
   };
 
+  const SelectionBox = (props: IPropsSelect) => {
+    return (
+      <LinearGradient
+        colors={['#2EF442', '#41CCA2']}
+        style={Style.selectionBox}>
+        <TouchableOpacity>
+          <Text style={{...Font.Heading3, ...Style.recordTypeText}}>
+            {props.recordType}
+          </Text>
+          <View style={Style.iconContainer}>
+            <MaterialIcons name={props.iconType} size={70} color="white" />
+          </View>
+        </TouchableOpacity>
+      </LinearGradient>
+    );
+  };
+
   return (
     <>
       <View style={Style.container}>
         <ScrollView>
           <View style={Style.topBox}>
             <NameBox />
+          </View>
+          <View style={Style.rowContainer}>
+            <SelectionBox recordType="Heart Rate" iconType="favorite" />
+            <SelectionBox recordType="Exercise Rate" iconType="accessibility" />
+          </View>
+          <View style={Style.rowContainer}>
+            <SelectionBox recordType="Sleep Quality" iconType="brightness-2" />
+            <SelectionBox recordType="Stress Level" iconType="poll" />
           </View>
         </ScrollView>
         <View style={Style.navbar}>
