@@ -70,9 +70,9 @@ const HomeScreen = (props: IProps) => {
             <SelectionBox recordType="Stress Level" iconType="poll" />
           </View>
         </ScrollView>
-        <View style={Style.navbar}>
-          <Navbar handleNavigation={props.handleNavigation} />
-        </View>
+      </View>
+      <View style={Style.navbar}>
+        <Navbar handleNavigation={props.handleNavigation} />
       </View>
     </>
   );

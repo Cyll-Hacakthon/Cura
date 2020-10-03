@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 7996,
+  "expoServerNgrokUrl": "https://ap-7ur.anonymous.cura.exp.direct",
+  "packagerNgrokUrl": "https://packager.ap-7ur.anonymous.cura.exp.direct",
+  "ngrokPid": 5240,
   "webpackServerPort": null
 }

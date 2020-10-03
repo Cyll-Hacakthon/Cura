@@ -7,7 +7,7 @@ export default StyleSheet.create({
     backgroundColor: CuraColor.White,
   },
   navbar: {
-    flex: 0.15,
+    flex: 0.1,
   },
   topBox: {
     backgroundColor: CuraColor.Green,

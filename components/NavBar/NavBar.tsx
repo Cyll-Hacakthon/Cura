@@ -2,7 +2,7 @@ import React from 'react';
 import ENavigation from './NavEnum';
 import Style from './NavBar.style';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
 
 interface IProp {
   active?: ENavigation;
@@ -16,9 +16,18 @@ const NavBar = (props: IProp) => {
     };
   };
 
-  const NavigateButton = (props: {destination: ENavigation}) => {
+  const NavigateButton = (props: {
+    destination: ENavigation;
+    iconType: string;
+  }) => {
     return (
       <TouchableOpacity onPress={navigate(props.destination)}>
+        <Feather
+          name={props.iconType}
+          size={24}
+          color={'white'}
+          style={{textAlign: 'center'}}
+        />
         <Text style={Style.navText}>{props.destination}</Text>
       </TouchableOpacity>
     );
@@ -26,10 +35,13 @@ const NavBar = (props: IProp) => {
 
   return (
     <View style={Style.container}>
-      <NavigateButton destination={ENavigation.HOME} />
-      <NavigateButton destination={ENavigation.FORUM} />
-      <NavigateButton destination={ENavigation.TAKE_NUMBER} />
-      <NavigateButton destination={ENavigation.SETTING} />
+      <NavigateButton destination={ENavigation.HOME} iconType="home" />
+      <NavigateButton destination={ENavigation.FORUM} iconType="monitor" />
+      <NavigateButton
+        destination={ENavigation.TAKE_NUMBER}
+        iconType="clipboard"
+      />
+      <NavigateButton destination={ENavigation.SETTING} iconType="settings" />
     </View>
   );
 };

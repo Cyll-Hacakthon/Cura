@@ -26,12 +26,13 @@ declare const global: {HermesInternal: null | {}};
 const App = () => {
   const [loadFont] = useFonts(customFont);
   const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
-  const [screen, setScreen] = useState<ENavigation>(ENavigation.HOME);
+  const [screen, setScreen] = useState<ENavigation>(ENavigation.FORUM);
 
   useEffect(() => {
     setTimeout(() => {
       setTimeFinishLoad(true);
     }, 3000);
+    console.log(screen);
   }, []);
 
   if (loadFont) {
