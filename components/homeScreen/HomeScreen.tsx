@@ -1,24 +1,26 @@
 import React from 'react';
 import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-import Navbar from '../NavBar/NavBar';
 import Style from './HomeScreen.style';
 import {LinearGradient} from 'expo-linear-gradient';
 import {Font} from '../../util';
 import {MaterialIcons} from '@expo/vector-icons';
+import {RootStackParamList} from '../../util';
 
 const userImage = require('../../assets/images/gitlab-logo.png');
 
-interface IProps {
-  handleNavigation: Function;
-}
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'HomeScreen'
+>;
 
 interface IPropsSelect {
   recordType: string;
   iconType: string;
 }
 
-const HomeScreen = (props: IProps) => {
+const HomeScreen = () => {
   const NameBox = () => {
     return (
       <View style={Style.nameBox}>
@@ -31,23 +33,23 @@ const HomeScreen = (props: IProps) => {
           </View>
         </View>
         <View style={Style.userImageBox}>
-          <Image style={Style.userImage} source={userImage}></Image>
+          <Image style={Style.userImage} source={userImage} />
         </View>
       </View>
     );
   };
 
-  const SelectionBox = (props: IPropsSelect) => {
+  const SelectionBox = ({recordType, iconType}: IPropsSelect) => {
     return (
       <LinearGradient
         colors={['#2EF442', '#41CCA2']}
         style={Style.selectionBox}>
         <TouchableOpacity>
           <Text style={{...Font.Heading3, ...Style.recordTypeText}}>
-            {props.recordType}
+            {recordType}
           </Text>
           <View style={Style.iconContainer}>
-            <MaterialIcons name={props.iconType} size={70} color="white" />
+            <MaterialIcons name={iconType} size={70} color="white" />
           </View>
         </TouchableOpacity>
       </LinearGradient>
@@ -70,9 +72,6 @@ const HomeScreen = (props: IProps) => {
             <SelectionBox recordType="Stress Level" iconType="poll" />
           </View>
         </ScrollView>
-      </View>
-      <View style={Style.navbar}>
-        <Navbar handleNavigation={props.handleNavigation} />
       </View>
     </>
   );

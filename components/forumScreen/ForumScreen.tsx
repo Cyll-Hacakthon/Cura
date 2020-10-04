@@ -8,7 +8,6 @@ import {
   Image,
 } from 'react-native';
 import {MaterialIcons, Feather} from '@expo/vector-icons';
-import Navbar from '../NavBar/NavBar';
 import Style from './ForumScreen.style';
 import {Font} from '../../util';
 
@@ -23,7 +22,7 @@ const ForumList = () => {
     <View style={Style.forumContainer}>
       <TouchableOpacity style={Style.forumBoxStyle}>
         <View style={Style.forumImagBox}>
-          <Image style={Style.forumImage} source={userImage}></Image>
+          <Image style={Style.forumImage} source={userImage} />
         </View>
         <View style={Style.forumTextBox}>
           <Text style={{...Font.Heading6, ...Style.forumText}}>
@@ -36,14 +35,16 @@ const ForumList = () => {
               style={{
                 ...Style.forumViewText,
                 ...Font.Heading6,
-              }}>{`100k `}</Text>
+              }}>
+              {'100k '}
+            </Text>
             <Feather name="eye" size={20} color="white" />
           </View>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={Style.forumBoxStyle}>
         <View style={Style.forumImagBox}>
-          <Image style={Style.forumImage} source={userImage}></Image>
+          <Image style={Style.forumImage} source={userImage} />
         </View>
         <View style={Style.forumTextBox}>
           <Text style={{...Font.Heading6, ...Style.forumText}}>
@@ -56,7 +57,9 @@ const ForumList = () => {
               style={{
                 ...Style.forumViewText,
                 ...Font.Heading6,
-              }}>{`100k `}</Text>
+              }}>
+              {'100k '}
+            </Text>
             <Feather name="eye" size={20} color="white" />
           </View>
         </View>
@@ -65,12 +68,12 @@ const ForumList = () => {
   );
 };
 
-const ForumScreen = (props: IProps) => {
+const ForumScreen = () => {
   return (
     <>
       <View style={Style.container}>
         <ScrollView>
-          <View style={Style.topBox}></View>
+          <View style={Style.topBox} />
           <Text style={{...Font.Heading1, ...Style.title}}>Forum</Text>
           <TouchableOpacity style={Style.addButton}>
             <MaterialIcons name="add-circle" size={40} color="white" />
@@ -90,9 +93,6 @@ const ForumScreen = (props: IProps) => {
           </View>
           <ForumList />
         </ScrollView>
-      </View>
-      <View style={Style.navbar}>
-        <Navbar handleNavigation={props.handleNavigation} />
       </View>
     </>
   );

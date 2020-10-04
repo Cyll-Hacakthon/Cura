@@ -28,3 +28,10 @@ export const Font = {
     lineHeight: 21,
   },
 };
+
+export type RootStackParamList = {
+  HomeScreen: undefined;
+  ForumScreen: undefined;
+  TakeNumberScreen: undefined;
+  SettingScreen: undefined;
+};
