@@ -81,4 +81,15 @@ export default StyleSheet.create({
     flex: 1,
     padding: 10,
   },
+  forumViewBox: {
+    flexDirection: 'column-reverse',
+  },
+  forumViewContent: {
+    flexDirection: 'row',
+    padding: 10,
+    height: '50%',
+  },
+  forumViewText: {
+    color: 'white',
+  },
 });

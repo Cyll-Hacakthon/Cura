@@ -7,7 +7,7 @@ import {
   TextInput,
   Image,
 } from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons';
+import {MaterialIcons, Feather} from '@expo/vector-icons';
 import Navbar from '../NavBar/NavBar';
 import Style from './ForumScreen.style';
 import {Font} from '../../util';
@@ -30,6 +30,16 @@ const ForumList = () => {
             Why Am I Dizzy After Taking A Nap?
           </Text>
         </View>
+        <View style={Style.forumViewBox}>
+          <View style={Style.forumViewContent}>
+            <Text
+              style={{
+                ...Style.forumViewText,
+                ...Font.Heading6,
+              }}>{`100k `}</Text>
+            <Feather name="eye" size={20} color="white" />
+          </View>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={Style.forumBoxStyle}>
         <View style={Style.forumImagBox}>
@@ -37,8 +47,18 @@ const ForumList = () => {
         </View>
         <View style={Style.forumTextBox}>
           <Text style={{...Font.Heading6, ...Style.forumText}}>
-            Why can’t I see anything when I close my eye?{' '}
+            Why Am I Dizzy After Taking A Nap?{' '}
           </Text>
+        </View>
+        <View style={Style.forumViewBox}>
+          <View style={Style.forumViewContent}>
+            <Text
+              style={{
+                ...Style.forumViewText,
+                ...Font.Heading6,
+              }}>{`100k `}</Text>
+            <Feather name="eye" size={20} color="white" />
+          </View>
         </View>
       </TouchableOpacity>
     </View>
