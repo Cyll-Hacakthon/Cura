@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {CuraColor} from '../../util';
+import {CuraColor, Font} from '../../util';
 
 export default StyleSheet.create({
   container: {
@@ -72,5 +72,10 @@ export default StyleSheet.create({
   iconContainer: {
     flexDirection: 'row-reverse',
     marginTop: 10,
+  },
+  questionListTitle: {
+    ...Font.Heading3,
+    ...Font.Bold,
+    textAlign: 'center',
   },
 });

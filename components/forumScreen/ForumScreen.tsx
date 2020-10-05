@@ -5,68 +5,16 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Image,
 } from 'react-native';
-import {MaterialIcons, Feather} from '@expo/vector-icons';
+import {MaterialIcons} from '@expo/vector-icons';
 import Style from './ForumScreen.style';
 import {Font} from '../../util';
+import QuestionList from './QuestionList';
 
-interface IProps {
-  handleNavigation: Function;
-}
-
-const userImage = require('../../assets/images/gitlab-logo.png');
-
-const ForumList = () => {
-  return (
-    <View style={Style.forumContainer}>
-      <TouchableOpacity style={Style.forumBoxStyle}>
-        <View style={Style.forumImagBox}>
-          <Image style={Style.forumImage} source={userImage} />
-        </View>
-        <View style={Style.forumTextBox}>
-          <Text style={{...Font.Heading6, ...Style.forumText}}>
-            Why Am I Dizzy After Taking A Nap?
-          </Text>
-        </View>
-        <View style={Style.forumViewBox}>
-          <View style={Style.forumViewContent}>
-            <Text
-              style={{
-                ...Style.forumViewText,
-                ...Font.Heading6,
-              }}>
-              {'100k '}
-            </Text>
-            <Feather name="eye" size={20} color="white" />
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity style={Style.forumBoxStyle}>
-        <View style={Style.forumImagBox}>
-          <Image style={Style.forumImage} source={userImage} />
-        </View>
-        <View style={Style.forumTextBox}>
-          <Text style={{...Font.Heading6, ...Style.forumText}}>
-            Why Am I Dizzy After Taking A Nap?{' '}
-          </Text>
-        </View>
-        <View style={Style.forumViewBox}>
-          <View style={Style.forumViewContent}>
-            <Text
-              style={{
-                ...Style.forumViewText,
-                ...Font.Heading6,
-              }}>
-              {'100k '}
-            </Text>
-            <Feather name="eye" size={20} color="white" />
-          </View>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
+const DummyData = [
+  {title: 'Why am I Dizzy after taking a nap?', viewsCount: '100k'},
+  {title: "Why Can't I See when I close my Eye", viewsCount: '200k'},
+];
 
 const ForumScreen = () => {
   return (
@@ -91,7 +39,7 @@ const ForumScreen = () => {
               underlineColorAndroid="transparent"
             />
           </View>
-          <ForumList />
+          <QuestionList questionData={DummyData} />
         </ScrollView>
       </View>
     </>

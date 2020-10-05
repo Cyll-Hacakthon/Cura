@@ -8,6 +8,8 @@ import {Font} from '../../util';
 import {MaterialIcons} from '@expo/vector-icons';
 import {RootStackParamList} from '../../util';
 
+import QuestionList from '../forumScreen/QuestionList';
+
 const userImage = require('../../assets/images/gitlab-logo.png');
 
 type HomeScreenNavigationProp = StackNavigationProp<
@@ -19,6 +21,11 @@ interface IPropsSelect {
   recordType: string;
   iconType: string;
 }
+
+const DummyData = [
+  {title: 'Why am I Dizzy after taking a nap?', viewsCount: '100k'},
+  {title: "Why Can't I See when I close my Eye", viewsCount: '200k'},
+];
 
 const HomeScreen = () => {
   const NameBox = () => {
@@ -71,6 +78,8 @@ const HomeScreen = () => {
             <SelectionBox recordType="Sleep Quality" iconType="brightness-2" />
             <SelectionBox recordType="Stress Level" iconType="poll" />
           </View>
+          <Text style={Style.questionListTitle}>Recent Questions</Text>
+          <QuestionList questionData={DummyData} />
         </ScrollView>
       </View>
     </>

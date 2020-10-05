@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {CuraColor, Font} from '../../util';
+import {CuraColor} from '../../util';
 
 export default StyleSheet.create({
   container: {
@@ -48,12 +48,6 @@ export default StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     color: '#424242',
-  },
-  forumContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   forumBoxStyle: {
     flex: 1,

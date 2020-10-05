@@ -1,3 +1,5 @@
+import {StyleSheet} from 'react-native';
+
 export const CuraColor = {
   DarkGreen: '#09835E',
   LightGreen: '#2EF442',
@@ -8,13 +10,18 @@ export const CuraColor = {
 export const customFont = {
   Rubik: require('../assets/fonts/Rubik-Regular.ttf'),
   RubikLight: require('../assets/fonts/Rubik-Light.ttf'),
+  RubikBold: require('../assets/fonts/Rubik-Bold.ttf'),
   IonIcons: require('../assets/fonts/ionicons.ttf'),
 };
 
-export const Font = {
+export const Font = StyleSheet.create({
   LeadSmall: {
     fontFamily: 'RubikLight',
     fontSize: 15,
+  },
+  Bold: {
+    fontFamily: 'RubikBold',
+    fontWeight: '500',
   },
   Heading1: {
     fontFamily: 'Rubik',
@@ -31,7 +38,7 @@ export const Font = {
     fontSize: 15,
     lineHeight: 21,
   },
-};
+});
 
 export type RootStackParamList = {
   HomeScreen: undefined;
