@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {Feather} from '@expo/vector-icons';
-import Style from './ForumScreen.style';
-import {Font} from '../../util';
+import Style from './QuestionBox.style';
+import {Font} from '../../../util';
 
-const userImage = require('../../assets/images/gitlab-logo.png');
+const userImage = require('../../../assets/images/gitlab-logo.png');
 
 interface IQuestionBoxProps {
-  // Rememver to include image during backend development
+  // Remember to include image during backend development
   title: string;
   viewsCount: string;
 }

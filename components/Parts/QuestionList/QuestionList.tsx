@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Style from './QuestionList.style';
-import QuestionBox from './QuestionBox';
+import QuestionBox from '../QuestionBox/QuestionBox';
 
 interface IForumListProps {
   questionData: Array<{title: string; viewsCount: string}>;

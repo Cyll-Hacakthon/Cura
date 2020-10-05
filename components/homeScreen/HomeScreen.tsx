@@ -8,7 +8,7 @@ import {Font} from '../../util';
 import {MaterialIcons} from '@expo/vector-icons';
 import {RootStackParamList} from '../../util';
 
-import QuestionList from '../forumScreen/QuestionList';
+import QuestionList from '../Parts/QuestionList/QuestionList';
 
 const userImage = require('../../assets/images/gitlab-logo.png');
 

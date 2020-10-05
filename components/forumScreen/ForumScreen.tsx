@@ -9,7 +9,7 @@ import {
 import {MaterialIcons} from '@expo/vector-icons';
 import Style from './ForumScreen.style';
 import {Font} from '../../util';
-import QuestionList from './QuestionList';
+import QuestionList from '../Parts/QuestionList/QuestionList';
 
 const DummyData = [
   {title: 'Why am I Dizzy after taking a nap?', viewsCount: '100k'},

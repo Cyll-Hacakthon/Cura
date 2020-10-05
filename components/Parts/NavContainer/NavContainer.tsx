@@ -3,12 +3,12 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Feather} from '@expo/vector-icons';
-import {CuraColor} from '../../util';
+import {CuraColor} from '../../../util';
 
-import HomeScreen from '../homeScreen/HomeScreen';
-import ForumScreen from '../forumScreen/ForumScreen';
-import SettingScreen from '../settingScreen/SettingScreen';
-import TakeNumberScreen from '../takeNumberScreen/TakeNumberScreen';
+import HomeScreen from '../../homeScreen/HomeScreen';
+import ForumScreen from '../../forumScreen/ForumScreen';
+import SettingScreen from '../../settingScreen/SettingScreen';
+import TakeNumberScreen from '../../takeNumberScreen/TakeNumberScreen';
 
 const Tab = createBottomTabNavigator();
 

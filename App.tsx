@@ -15,7 +15,7 @@ import {AppLoading} from 'expo';
 import {useFonts} from 'expo-font';
 
 import SplashScreen from './components/splashScreen/SplashScreen';
-import NavContainer from './components/NavContainer/NavContainer';
+import NavContainer from './components/Parts/NavContainer/NavContainer';
 //import ENavigation from './components/NavBar/NavEnum';
 
 //Redux Store
