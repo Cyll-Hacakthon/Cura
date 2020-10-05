@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {CuraColor} from '../../../util';
 
 const QuestionBoxStyle = StyleSheet.create({
-  forumBoxStyle: {
+  questionBoxStyle: {
     flex: 1,
     flexDirection: 'row',
     marginTop: 20,
@@ -12,13 +12,13 @@ const QuestionBoxStyle = StyleSheet.create({
     backgroundColor: CuraColor.Green,
     elevation: 5,
   },
-  forumImage: {
+  userImage: {
     width: 47,
     height: 47,
     backgroundColor: CuraColor.White,
     borderRadius: 5,
   },
-  forumImagBox: {
+  questionUserImageBox: {
     padding: 10,
   },
   forumText: {

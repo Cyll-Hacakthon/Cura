@@ -14,15 +14,15 @@ interface IQuestionBoxProps {
 
 const QuestionBox = ({title, viewsCount}: IQuestionBoxProps) => {
   return (
-    <TouchableOpacity style={Style.forumBoxStyle}>
-      <View style={Style.forumImagBox}>
-        <Image style={Style.forumImage} source={userImage} />
+    <TouchableOpacity style={Style.questionBoxStyle}>
+      <View style={Style.questionUserImageBox}>
+        <Image style={Style.userImage} source={userImage} />
       </View>
-      <View style={Style.forumTextBox}>
-        <Text style={{...Font.Heading6, ...Style.forumText}}>{title}</Text>
+      <View style={Style.questionTitleBox}>
+        <Text style={{...Font.Heading6, ...Style.questionTitle}}>{title}</Text>
       </View>
-      <View style={Style.forumViewBox}>
-        <View style={Style.forumViewContent}>
+      <View style={Style.questionViewsCountBox}>
+        <View style={Style.questionViewContent}>
           <Text
             style={{
               ...Style.forumViewText,
