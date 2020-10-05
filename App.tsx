@@ -65,7 +65,6 @@ const App = () => {
       return (
         <Provider store={store}>
           <ReactReduxFirebaseProvider {...rrfProps}>
-            {/* <AppNavigator /> */}
             <NavContainer />
           </ReactReduxFirebaseProvider>
         </Provider>

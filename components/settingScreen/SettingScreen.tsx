@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, Switch} from 'react-native';
+import {View, Text, Image, Switch, TouchableOpacity} from 'react-native';
 import Style from './SettingScreen.style';
 import {CuraColor} from '../../util';
 import {Feather} from '@expo/vector-icons';
@@ -10,6 +10,7 @@ interface IOptionButtonBox {
   iconName: string;
   boxTitle: string;
   children?: React.ReactElement;
+  pressAction?: Function;
 }
 
 const SettingScreen = () => {
@@ -53,6 +54,7 @@ const SettingScreen = () => {
     iconName,
     boxTitle,
     children,
+    pressAction,
   }: IOptionButtonBox) => {
     const ArrowIcon = (
       <Feather
@@ -63,20 +65,29 @@ const SettingScreen = () => {
       />
     );
     return (
-      <View style={Style.optionButton}>
-        <Feather style={Style.iconContainer} name={iconName} size={20} />
-        <Text style={Style.wordContainer}>{boxTitle}</Text>
-        {children ? children : ArrowIcon}
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          pressAction ? pressAction() : null;
+        }}>
+        <View style={Style.optionButton}>
+          <Feather style={Style.iconContainer} name={iconName} size={20} />
+          <Text style={Style.wordContainer}>{boxTitle}</Text>
+          {children ? children : ArrowIcon}
+        </View>
+      </TouchableOpacity>
     );
   };
+
   return (
     <>
       <View>
         <TopBox />
         <View style={Style.optionSelectionBox}>
           <MainButtonBox />
-          <OptionButtonBox iconName="eye" boxTitle="Healthcare Data Tracing">
+          <OptionButtonBox
+            iconName="eye"
+            boxTitle="Healthcare Data Tracing"
+            pressAction={toggleSwitch}>
             <Switch
               style={Style.iconContainer}
               trackColor={{false: '#767577', true: CuraColor.LightGreen}}

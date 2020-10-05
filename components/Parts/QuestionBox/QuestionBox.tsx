@@ -25,7 +25,7 @@ const QuestionBox = ({title, viewsCount}: IQuestionBoxProps) => {
         <View style={Style.questionViewContent}>
           <Text
             style={{
-              ...Style.forumViewText,
+              ...Style.questionViewCountsText,
               ...Font.Heading6,
             }}>
             {viewsCount + ' '}

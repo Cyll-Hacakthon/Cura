@@ -21,22 +21,22 @@ const QuestionBoxStyle = StyleSheet.create({
   questionUserImageBox: {
     padding: 10,
   },
-  forumText: {
+  questionTitle: {
     color: 'white',
   },
-  forumTextBox: {
+  questionTitleBox: {
     flex: 1,
     padding: 10,
   },
-  forumViewBox: {
+  questionViewsCountBox: {
     flexDirection: 'column-reverse',
   },
-  forumViewContent: {
+  questionViewContent: {
     flexDirection: 'row',
     padding: 10,
     height: '50%',
   },
-  forumViewText: {
+  questionViewCountsText: {
     color: 'white',
   },
 });
