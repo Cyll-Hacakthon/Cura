@@ -12,15 +12,19 @@ export const customFont = {
 };
 
 export const Font = {
-  Heading3: {
-    fontFamily: 'Rubik',
-    fontSize: 31,
-    lineHeight: 39,
+  LeadSmall: {
+    fontFamily: 'RubikLight',
+    fontSize: 15,
   },
   Heading1: {
     fontFamily: 'Rubik',
     fontSize: 45,
     lineHeight: 53,
+  },
+  Heading3: {
+    fontFamily: 'Rubik',
+    fontSize: 31,
+    lineHeight: 39,
   },
   Heading6: {
     fontFamily: 'RubikLight',
