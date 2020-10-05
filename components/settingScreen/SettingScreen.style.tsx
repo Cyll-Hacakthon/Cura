@@ -70,6 +70,22 @@ const curaStyle = StyleSheet.create({
     marginVertical: 15,
     justifyContent: 'space-around',
   },
+  optionButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderTopColor: '#777777',
+    borderTopWidth: 1,
+  },
+  iconContainer: {
+    flex: 1,
+  },
+  wordContainer: {
+    flex: 5,
+  },
 });
 
 export default curaStyle;
