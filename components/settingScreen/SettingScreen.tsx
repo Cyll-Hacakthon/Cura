@@ -100,7 +100,7 @@ const SettingScreen = () => {
           <OptionButtonBox iconName="user" boxTitle="Personal Information" />
           <OptionButtonBox iconName="list" boxTitle="Healthcare Records" />
           <OptionButtonBox iconName="database" boxTitle="Data Management" />
-          <View style={Style.optionButton} />
+          <OptionButtonBox iconName="x-square" boxTitle="Logout" />
         </View>
       </View>
     </>
