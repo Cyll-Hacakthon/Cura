@@ -15,8 +15,7 @@ import {AppLoading} from 'expo';
 import {useFonts} from 'expo-font';
 
 import SplashScreen from './components/splashScreen/SplashScreen';
-import NavContainer from './components/Parts/NavContainer/NavContainer';
-//import ENavigation from './components/NavBar/NavEnum';
+import AppPresentation from './components/AppPresentation';
 
 //Redux Store
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -28,8 +27,6 @@ import thunk from 'redux-thunk';
 import firebase from './util/firebase';
 import {createFirestoreInstance} from 'redux-firestore';
 import {ReactReduxFirebaseProvider} from 'react-redux-firebase';
-
-declare const global: {HermesInternal: null | {}};
 
 //Store Creation
 const initialState = {};
@@ -65,7 +62,7 @@ const App = () => {
       return (
         <Provider store={store}>
           <ReactReduxFirebaseProvider {...rrfProps}>
-            <NavContainer />
+            <AppPresentation />
           </ReactReduxFirebaseProvider>
         </Provider>
       );
