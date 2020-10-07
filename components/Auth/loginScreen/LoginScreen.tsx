@@ -76,9 +76,9 @@ const mapState = (state: RootState) => {
 };
 
 const mapDispatch = {
-  loginUser: (username: string, password: string) => ({
+  loginUser: (email: string, password: string) => ({
     type: 'LOGIN',
-    payload: {username, password},
+    payload: {email, password},
   }),
 };
 

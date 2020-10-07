@@ -7,15 +7,22 @@ import {LinearGradient} from 'expo-linear-gradient';
 import {Font} from '../../util';
 import {MaterialIcons} from '@expo/vector-icons';
 import {RootStackParamList} from '../../util';
-
 import QuestionList from '../Parts/QuestionList/QuestionList';
 
+import {connect, ConnectedProps} from 'react-redux';
+
+import {RootState} from '../../store/reducers/rootReducer';
+
 const userImage = require('../../assets/images/gitlab-logo.png');
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type HomeScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'HomeScreen'
 >;
+
+type HomeScreenProps = PropsFromRedux & {};
 
 interface IPropsSelect {
   recordType: string;
@@ -27,7 +34,7 @@ const DummyData = [
   {title: "Why Can't I See when I close my Eye", viewsCount: '200k'},
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({username}: HomeScreenProps) => {
   const NameBox = () => {
     return (
       <View style={Style.nameBox}>
@@ -36,7 +43,7 @@ const HomeScreen = () => {
             <Text style={Style.welcomeWord}>Welcome Back,</Text>
           </View>
           <View>
-            <Text style={Style.userName}>Wendy Moe</Text>
+            <Text style={Style.userName}>{username}</Text>
           </View>
         </View>
         <View style={Style.userImageBox}>
@@ -86,4 +93,10 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+const mapState = (state: RootState) => {
+  return {username: state.user.name};
+};
+
+const connector = connect(mapState);
+
+export default connector(HomeScreen);
