@@ -9,6 +9,7 @@ import HomeScreen from '../../homeScreen/HomeScreen';
 import ForumScreen from '../../forumScreen/ForumScreen';
 import SettingScreen from '../../settingScreen/SettingScreen';
 import TakeNumberScreen from '../../takeNumberScreen/TakeNumberScreen';
+import NotificationScreen from '../../notificationScreen/NotificationScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +18,7 @@ const NavContainer = () => {
     {name: 'Home', component: HomeScreen},
     {name: 'Forum', component: ForumScreen},
     {name: 'Take Number', component: TakeNumberScreen},
+    {name: 'Notification', component: NotificationScreen}, // Change Component
     {name: 'Setting', component: SettingScreen},
   ];
 
@@ -39,6 +41,9 @@ const NavContainer = () => {
                 break;
               case 'Setting':
                 iconName = 'settings';
+                break;
+              case 'Notification':
+                iconName = 'bell';
                 break;
               default:
                 iconName = 'home';
