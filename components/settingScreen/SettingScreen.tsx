@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
+import {connect, ConnectedProps} from 'react-redux';
 import {View, Text, Image, Switch, TouchableOpacity} from 'react-native';
 import Style from './SettingScreen.style';
 import {CuraColor} from '../../util';
 import {Feather} from '@expo/vector-icons';
+import {RootState} from '../../store//reducers/rootReducer';
 
 const userImage = require('../../assets/images/userProfileImage.jpg');
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface IOptionButtonBox {
   iconName: string;
@@ -13,7 +17,9 @@ interface IOptionButtonBox {
   pressAction?: Function;
 }
 
-const SettingScreen = () => {
+type SettingScreenProps = PropsFromRedux & {};
+
+const SettingScreen = ({email, username}: SettingScreenProps) => {
   const [trackingIsEnable, setTrackingEnable] = useState(false);
   const toggleSwitch = () => setTrackingEnable((prevState) => !prevState);
 
@@ -23,8 +29,8 @@ const SettingScreen = () => {
         <View style={Style.profileBox}>
           <Image style={Style.userImage} source={userImage} />
           <View style={Style.wordBox}>
-            <Text style={Style.nameText}>Wendy Moe</Text>
-            <Text style={Style.mailText}>WendyNo5@gmail.com</Text>
+            <Text style={Style.nameText}>{username}</Text>
+            <Text style={Style.mailText}>{email}</Text>
           </View>
         </View>
       </View>
@@ -107,4 +113,10 @@ const SettingScreen = () => {
   );
 };
 
-export default SettingScreen;
+const mapState = (state: RootState) => {
+  return {username: state.user.name, email: state.user.email};
+};
+
+const connector = connect(mapState);
+
+export default connector(SettingScreen);
