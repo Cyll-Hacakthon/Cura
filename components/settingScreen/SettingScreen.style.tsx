@@ -15,7 +15,7 @@ const curaStyle = StyleSheet.create({
     height: 65,
     width: 65,
     backgroundColor: CuraColor.White,
-    borderRadius: 5,
+    borderRadius: 35,
   },
   profileBox: {
     marginTop: -15,

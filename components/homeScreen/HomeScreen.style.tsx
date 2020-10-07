@@ -37,7 +37,7 @@ export default StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: CuraColor.White,
-    borderRadius: 5,
+    borderRadius: 25,
     alignSelf: 'flex-end',
   },
   userImageBox: {

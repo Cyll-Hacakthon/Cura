@@ -4,7 +4,7 @@ import Style from './SettingScreen.style';
 import {CuraColor} from '../../util';
 import {Feather} from '@expo/vector-icons';
 
-const userImage = require('../../assets/images/gitlab-logo.png');
+const userImage = require('../../assets/images/userProfileImage.jpg');
 
 interface IOptionButtonBox {
   iconName: string;

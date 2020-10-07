@@ -13,7 +13,7 @@ import {connect, ConnectedProps} from 'react-redux';
 
 import {RootState} from '../../store/reducers/rootReducer';
 
-const userImage = require('../../assets/images/gitlab-logo.png');
+const userImage = require('../../assets/images/userProfileImage.jpg');
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
