@@ -1,4 +1,5 @@
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 
 export interface UserState {
@@ -20,4 +21,8 @@ interface LoginAction {
   };
 }
 
-export type UserActionTypes = LoginAction;
+interface LogoutAction {
+  type: typeof LOGOUT;
+}
+
+export type UserActionTypes = LoginAction | LogoutAction;

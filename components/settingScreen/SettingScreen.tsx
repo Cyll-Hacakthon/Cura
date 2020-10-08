@@ -19,7 +19,7 @@ interface IOptionButtonBox {
 
 type SettingScreenProps = PropsFromRedux & {};
 
-const SettingScreen = ({email, username}: SettingScreenProps) => {
+const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
   const [trackingIsEnable, setTrackingEnable] = useState(false);
   const toggleSwitch = () => setTrackingEnable((prevState) => !prevState);
 
@@ -106,7 +106,13 @@ const SettingScreen = ({email, username}: SettingScreenProps) => {
           <OptionButtonBox iconName="user" boxTitle="Personal Information" />
           <OptionButtonBox iconName="list" boxTitle="Healthcare Records" />
           <OptionButtonBox iconName="database" boxTitle="Data Management" />
-          <OptionButtonBox iconName="x-square" boxTitle="Logout" />
+          <OptionButtonBox
+            iconName="x-square"
+            boxTitle="Logout"
+            pressAction={() => {
+              logoutUser();
+            }}
+          />
         </View>
       </View>
     </>
@@ -117,6 +123,12 @@ const mapState = (state: RootState) => {
   return {username: state.user.name, email: state.user.email};
 };
 
-const connector = connect(mapState);
+const mapDispatch = {
+  logoutUser: () => ({
+    type: 'LOGOUT',
+  }),
+};
+
+const connector = connect(mapState, mapDispatch);
 
 export default connector(SettingScreen);
