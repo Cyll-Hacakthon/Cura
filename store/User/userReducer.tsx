@@ -1,4 +1,3 @@
-import {actionTypes} from 'redux-firestore';
 import {UserState, UserActionTypes, LOGIN, LOGOUT} from './types';
 
 const initialUserState: UserState = {
@@ -14,7 +13,7 @@ const UserReducer = (state = initialUserState, action: UserActionTypes) => {
         ...state,
         isLoggedIn: true,
         email: action.payload.email,
-        name: action.payload.email.split('@')[0], // Should retrieve from database
+        name: action.payload.name, // Should retrieve from database
       };
     case LOGOUT:
       return {

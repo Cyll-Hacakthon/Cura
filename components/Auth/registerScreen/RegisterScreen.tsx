@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Firebase from '../../../util/firebase';
 import {TextInput, Text, View, TouchableOpacity} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Style from './RegisterScreen.style';
@@ -19,27 +20,85 @@ type RegisterScreenProps = {
 };
 
 const RegisterScreen = ({navigation}: RegisterScreenProps) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [tncIsAccepted, setTncIsAccepted] = useState(false);
+
+  const handleRegisterPress = () => {
+    if (password !== confirmPassword) {
+      return; // Password don't match
+    }
+    Firebase.auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        const uid = response.user?.uid;
+
+        if (uid) {
+          const data = {
+            id: uid,
+            email,
+            name,
+            birthdate,
+          };
+          const usersRef = Firebase.firestore().collection('users');
+          usersRef
+            .doc(uid)
+            .set(data)
+            .then(() => {
+              console.log('Siap Registering');
+            })
+            .catch((error) => {
+              console.log('ERROR: ' + error);
+            });
+        } else {
+          throw Error('No UID');
+        }
+      })
+      .then((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <GradientBackground>
       <Text style={Style.titleText}> Cura Register</Text>
       <Card>
-        <TextInput style={Style.inputStyle} placeholder="Name" />
+        <TextInput
+          style={Style.inputStyle}
+          placeholder="Name"
+          value={name}
+          onChangeText={(newValue) => {
+            setName(newValue);
+          }}
+        />
         <TextInput
           style={Style.inputStyle}
           placeholder="Email, eg: johndoe@email.com"
+          value={email}
+          onChangeText={(newValue) => {
+            setEmail(newValue);
+          }}
         />
         <TextInput
           style={Style.inputStyle}
           placeholder="Password, make it secure!"
           secureTextEntry={true}
+          value={password}
+          onChangeText={(newValue) => {
+            setPassword(newValue);
+          }}
         />
         <TextInput
           style={Style.inputStyle}
           placeholder="Confirm Password"
           secureTextEntry={true}
+          value={confirmPassword}
+          onChangeText={(newValue) => {
+            setConfirmPassword(newValue);
+          }}
         />
         <View style={Style.inputBox}>
           <Text>Birthdate</Text>
@@ -66,7 +125,10 @@ const RegisterScreen = ({navigation}: RegisterScreenProps) => {
           <Text>I accept the </Text>
           <Text style={Style.underlineText}>Terms & Condition</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            handleRegisterPress();
+          }}>
           <View style={Style.buttonStyle}>
             <Text style={Style.buttonText}>Register</Text>
           </View>

@@ -10,14 +10,14 @@ export interface UserState {
 
 export interface LoginDetail {
   email: string;
-  password: string;
+  name: string;
 }
 
 interface LoginAction {
   type: typeof LOGIN;
   payload: {
     email: string;
-    password: string;
+    name: string;
   };
 }
 

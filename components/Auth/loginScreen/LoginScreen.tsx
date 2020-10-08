@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Firebase from '../../../util/firebase';
 import {connect, ConnectedProps} from 'react-redux';
 import Style from './LoginScreen.style';
 import {TextInput, View, Text, TouchableOpacity} from 'react-native';
@@ -25,6 +26,27 @@ const LoginScreen = (props: LoginScreenProps) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
+  const handleLoginPress = () => {
+    Firebase.auth()
+      .signInWithEmailAndPassword(userEmail, userPassword)
+      .then((response) => {
+        const uid = response.user?.uid;
+        const usersRef = Firebase.firestore().collection('users');
+
+        usersRef
+          .doc(uid)
+          .get()
+          .then((firestoreDocument) => {
+            if (!firestoreDocument.exists) {
+              console.log("User Doesn't Exists");
+              return;
+            }
+            const user = firestoreDocument.data();
+            props.loginUser(user?.email, user?.name);
+          });
+      });
+  };
+
   return (
     <GradientBackground>
       <Text style={Style.titleText}>Cura Login</Text>
@@ -48,7 +70,7 @@ const LoginScreen = (props: LoginScreenProps) => {
         />
         <TouchableOpacity
           onPress={() => {
-            props.loginUser(userEmail, userPassword);
+            handleLoginPress();
           }}>
           <View style={Style.buttonStyle}>
             <Text style={Style.buttonText}>Login</Text>
@@ -76,9 +98,9 @@ const mapState = (state: RootState) => {
 };
 
 const mapDispatch = {
-  loginUser: (email: string, password: string) => ({
+  loginUser: (email: string, name: string) => ({
     type: 'LOGIN',
-    payload: {email, password},
+    payload: {email, name},
   }),
 };
 
