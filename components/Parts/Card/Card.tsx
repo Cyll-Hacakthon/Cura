@@ -4,10 +4,11 @@ import Style from './Card.style';
 
 interface ICardProps {
   children: Array<React.ReactElement> | React.ReactElement;
+  style?: Object;
 }
 
-const Card = ({children}: ICardProps) => {
-  return <View style={Style.card}>{children}</View>;
+const Card = ({children, style}: ICardProps) => {
+  return <View style={{...Style.card, ...style}}>{children}</View>;
 };
 
 export default Card;
