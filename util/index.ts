@@ -11,7 +11,7 @@ export const customFont = {
   Rubik: require('../assets/fonts/Rubik-Regular.ttf'),
   RubikLight: require('../assets/fonts/Rubik-Light.ttf'),
   RubikBold: require('../assets/fonts/Rubik-Bold.ttf'),
-  IonIcons: require('../assets/fonts/ionicons.ttf'),
+  Feather: require('react-native-vector-icons/Fonts/Feather.ttf'),
 };
 
 export const Font = StyleSheet.create({

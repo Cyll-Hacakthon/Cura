@@ -8,7 +8,7 @@ import {CuraColor} from '../../../util';
 import HomeScreen from '../../homeScreen/HomeScreen';
 import ForumScreen from '../../forumScreen/ForumScreen';
 import SettingScreen from '../../settingScreen/SettingScreen';
-import TakeNumberScreen from '../../takeNumberScreen/TakeNumberScreen';
+import TakeNumberContainer from '../../Parts/TakeNumberContainer/TakeNumberContainer';
 import NotificationScreen from '../../notificationScreen/NotificationScreen';
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +17,7 @@ const NavContainer = () => {
   const screens = [
     {name: 'Home', component: HomeScreen},
     {name: 'Forum', component: ForumScreen},
-    {name: 'Take Number', component: TakeNumberScreen},
+    {name: 'Take Number', component: TakeNumberContainer},
     {name: 'Notification', component: NotificationScreen}, // Change Component
     {name: 'Setting', component: SettingScreen},
   ];

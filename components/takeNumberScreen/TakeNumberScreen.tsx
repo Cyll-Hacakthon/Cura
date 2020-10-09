@@ -1,13 +1,24 @@
 import React from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Style from './TakeNumber.style';
+import {StackNavigationProp} from '@react-navigation/stack';
+import TakeNumberStackParamList from '../Parts/TakeNumberContainer/RootStackParamList';
 
 import Card from '../Parts/Card/Card';
 import {Text, View, TextInput} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const TakeNumberScreen = () => {
+type TakeNumberScreenNavigationProp = StackNavigationProp<
+  TakeNumberStackParamList,
+  'Take Number'
+>;
+
+type TakeNumberProps = {
+  navigation: TakeNumberScreenNavigationProp;
+};
+
+const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
   return (
     <>
       <MapView
@@ -23,6 +34,9 @@ const TakeNumberScreen = () => {
         <Marker
           coordinate={{latitude: 5.422016, longitude: 100.313827}}
           title={'Penang Island Hospital'}
+          description={
+            'Island Hospital, 308 Jalan Macalister, 10450 Georgetown, Pulau Pinang, Malaysia'
+          }
         />
       </MapView>
       <View style={Style.uiLayer}>
@@ -38,7 +52,10 @@ const TakeNumberScreen = () => {
             />
           </View>
           <View style={Style.proceedButtonBox}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Queue Information', {hospitalID: 12345});
+              }}>
               <Text style={Style.proceedButton}>Proceed</Text>
             </TouchableOpacity>
           </View>
