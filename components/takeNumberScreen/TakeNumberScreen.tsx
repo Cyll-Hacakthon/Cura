@@ -5,10 +5,14 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import TakeNumberStackParamList from '../Parts/TakeNumberContainer/RootStackParamList';
 import Firebase from '../../util/firebase';
 
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
+
 import Card from '../Parts/Card/Card';
-import {Text, View, TextInput} from 'react-native';
+import {Text, View, TextInput, Keyboard} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import HospitalListCard from './HospitalList/HospitalList';
 
 type TakeNumberScreenNavigationProp = StackNavigationProp<
   TakeNumberStackParamList,
@@ -21,24 +25,57 @@ type TakeNumberProps = {
 
 const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
   const [hospitalList, setHospitalList] = useState<hospitalListType>([]);
+  const [focusedLocation, setFocusedLocation] = useState({
+    latitude: 5.285153,
+    longitude: 100.456238,
+  });
+  const [showHospitalListCard, setShowHospitalListCard] = useState(false);
 
   useEffect(() => {
     const getHospitalData = async () => {
       setHospitalList(await getHospitals());
     };
 
+    const getLocation = async () => {
+      const {status} = await Permissions.askAsync(Permissions.LOCATION);
+
+      if (status !== 'granted') {
+        console.log("This bullshit won't work");
+      }
+
+      const userLocation = await Location.getCurrentPositionAsync({
+        accuracy: 2, // LocationAccuracy enum don't work...
+      });
+      setFocusedLocation({
+        latitude: userLocation.coords.latitude,
+        longitude: userLocation.coords.longitude,
+      });
+    };
+
     getHospitalData();
+    getLocation();
   }, []);
+
+  const onHospitalTap = (coord: {latitude: number; longitude: number}) => {
+    setFocusedLocation({latitude: coord.latitude, longitude: coord.longitude});
+    setShowHospitalListCard(false);
+  };
 
   return (
     <>
       <MapView
         style={Style.mapDisplay}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation
+        showsUserLocation={true}
+        region={{
+          latitude: focusedLocation.latitude,
+          longitude: focusedLocation.longitude,
+          latitudeDelta: 0.01, //0.0922
+          longitudeDelta: 0.01, //0.0421
+        }}
         initialRegion={{
-          latitude: 5.285153,
-          longitude: 100.456238,
+          latitude: focusedLocation.latitude,
+          longitude: focusedLocation.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}>
@@ -46,6 +83,7 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
           return (
             <Marker
               key={index}
+              pinColor="blue"
               coordinate={{
                 latitude: hospital.location.latitude,
                 longitude: hospital.location.longitude,
@@ -56,11 +94,23 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
           );
         })}
       </MapView>
+      {showHospitalListCard ? (
+        <View style={Style.uiLayerList}>
+          <HospitalListCard
+            style={Style.listCardStyle}
+            hospitalList={hospitalList}
+            onHospitalTap={onHospitalTap}
+            toggleList={setShowHospitalListCard}
+          />
+        </View>
+      ) : null}
       <View style={Style.uiLayer}>
         <Card style={Style.searchBoxCard}>
-          <Text style={Style.searchBoxCardTitle}>Search Hospital</Text>
           <View style={Style.searchInputBox}>
-            <TextInput style={Style.searchInput} />
+            <TextInput
+              style={Style.searchInput}
+              placeholder="Search Hospital"
+            />
             <MaterialIcons
               style={Style.searchIcon}
               name="search"
@@ -71,9 +121,10 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
           <View style={Style.proceedButtonBox}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Queue Information', {hospitalID: 12345});
+                Keyboard.dismiss();
+                setShowHospitalListCard(true);
               }}>
-              <Text style={Style.proceedButton}>Proceed</Text>
+              <Text style={Style.proceedButton}>Search</Text>
             </TouchableOpacity>
           </View>
         </Card>

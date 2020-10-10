@@ -15,6 +15,16 @@ const TakeNumberScreenStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  uiLayerList: {
+    flex: 1,
+    position: 'absolute',
+    bottom: '25%',
+    top: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   searchBoxCard: {
     marginBottom: '8%',
   },
@@ -45,6 +55,7 @@ const TakeNumberScreenStyle = StyleSheet.create({
   },
   proceedButtonBox: {
     marginTop: 15,
+    marginBottom: -5,
     backgroundColor: CuraColor.Green,
     paddingVertical: 5,
     borderRadius: 15,
@@ -54,6 +65,11 @@ const TakeNumberScreenStyle = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 20,
+  },
+  listCardStyle: {
+    marginTop: 35,
+    width: 325,
+    maxHeight: 360,
   },
 });
 
