@@ -71,6 +71,31 @@ const TakeNumberScreenStyle = StyleSheet.create({
     width: 325,
     maxHeight: 360,
   },
+  selectedHospitalBar: {
+    flexDirection: 'row',
+    marginTop: 25,
+    paddingHorizontal: 10,
+  },
+  selectedHospitalNameBox: {
+    backgroundColor: CuraColor.Green,
+    borderRadius: 15,
+    padding: 5,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  selectedHospitalName: {
+    color: 'white',
+  },
+  selectedHospitalConfirmButton: {
+    backgroundColor: CuraColor.Green,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    flex: 0.2,
+    marginLeft: 2,
+  },
 });
 
 export default TakeNumberScreenStyle;

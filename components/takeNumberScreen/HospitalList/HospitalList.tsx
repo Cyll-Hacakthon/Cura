@@ -32,10 +32,7 @@ const HospitalList = ({
             return (
               <TouchableOpacity
                 onPress={() => {
-                  onHospitalTap({
-                    latitude: hospital.location.latitude,
-                    longitude: hospital.location.longitude,
-                  });
+                  onHospitalTap(hospital);
                 }}>
                 <ListItem
                   title={hospital.name}

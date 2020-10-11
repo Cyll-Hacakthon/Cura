@@ -7,7 +7,8 @@ import Firebase from '../../util/firebase';
 
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-
+import {Feather} from '@expo/vector-icons';
+import {hospitalListType, hospitalSearch, hospitalType} from './hospitalSearch';
 import Card from '../Parts/Card/Card';
 import {Text, View, TextInput, Keyboard} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
@@ -25,11 +26,16 @@ type TakeNumberProps = {
 
 const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
   const [hospitalList, setHospitalList] = useState<hospitalListType>([]);
+  const [searchResult, setSearchResult] = useState<hospitalListType>([]);
+  const [searchTarget, setSearchTarget] = useState<string>('');
   const [focusedLocation, setFocusedLocation] = useState({
     latitude: 5.285153,
     longitude: 100.456238,
   });
   const [showHospitalListCard, setShowHospitalListCard] = useState(false);
+  const [selectedHospital, setSelectedHospital] = useState<hospitalType | null>(
+    null,
+  );
 
   useEffect(() => {
     const getHospitalData = async () => {
@@ -56,9 +62,25 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
     getLocation();
   }, []);
 
-  const onHospitalTap = (coord: {latitude: number; longitude: number}) => {
-    setFocusedLocation({latitude: coord.latitude, longitude: coord.longitude});
+  const onHospitalTap = (hospital: hospitalType) => {
+    setFocusedLocation({
+      latitude: hospital.location.latitude,
+      longitude: hospital.location.longitude,
+    });
+    setSelectedHospital(hospital);
     setShowHospitalListCard(false);
+  };
+
+  const handleHospitalSearch = () => {
+    setSearchResult(hospitalSearch(searchTarget, hospitalList));
+  };
+
+  const handleProceedTakeNumber = () => {
+    if (selectedHospital) {
+      navigation.navigate('Queue Information', {
+        hospitalID: selectedHospital.id,
+      });
+    }
   };
 
   return (
@@ -83,7 +105,6 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
           return (
             <Marker
               key={index}
-              pinColor="blue"
               coordinate={{
                 latitude: hospital.location.latitude,
                 longitude: hospital.location.longitude,
@@ -98,18 +119,45 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
         <View style={Style.uiLayerList}>
           <HospitalListCard
             style={Style.listCardStyle}
-            hospitalList={hospitalList}
+            hospitalList={searchResult}
             onHospitalTap={onHospitalTap}
             toggleList={setShowHospitalListCard}
           />
         </View>
       ) : null}
+      {selectedHospital && !showHospitalListCard ? (
+        <View style={Style.uiLayerList}>
+          <View style={Style.selectedHospitalBar}>
+            <View style={Style.selectedHospitalNameBox}>
+              <Text style={Style.selectedHospitalName}>
+                {selectedHospital.name}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setSelectedHospital(null);
+                }}>
+                <Feather name="x-circle" size={20} color="white" />
+              </TouchableOpacity>
+            </View>
+            <View style={Style.selectedHospitalConfirmButton}>
+              <TouchableOpacity onPress={() => handleProceedTakeNumber()}>
+                <Feather name="check" size={20} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      ) : null}
+
       <View style={Style.uiLayer}>
         <Card style={Style.searchBoxCard}>
           <View style={Style.searchInputBox}>
             <TextInput
               style={Style.searchInput}
               placeholder="Search Hospital"
+              value={searchTarget}
+              onChangeText={(newValue) => {
+                setSearchTarget(newValue);
+              }}
             />
             <MaterialIcons
               style={Style.searchIcon}
@@ -123,6 +171,7 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
               onPress={() => {
                 Keyboard.dismiss();
                 setShowHospitalListCard(true);
+                handleHospitalSearch();
               }}>
               <Text style={Style.proceedButton}>Search</Text>
             </TouchableOpacity>
@@ -132,13 +181,6 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
     </>
   );
 };
-
-type hospitalListType = Array<{
-  id: string;
-  name: string;
-  address: string;
-  location: {latitude: number; longitude: number};
-}>;
 
 const getHospitals = async (): Promise<hospitalListType> => {
   const db = Firebase.firestore();
