@@ -4,7 +4,7 @@ import {View, Text, TextInput} from 'react-native';
 import TakeNumberStackParamList from '../Parts/TakeNumberContainer/RootStackParamList';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
-import Firebase from '../../util/firebase';
+import {getHospitalInformation} from './functions';
 
 import TopBox from '../Parts/TopBox/TopBox';
 import Card from '../Parts/Card/Card';
@@ -14,27 +14,6 @@ import RootStackParamList from '../Parts/TakeNumberContainer/RootStackParamList'
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 //Dummy Data
-const Specialist = [
-  {
-    label: 'Pediatrics',
-    value: 'pediatrics',
-  },
-  {
-    label: 'Neurology',
-    value: 'neurology',
-  },
-];
-
-const Doctors = [
-  {
-    label: 'Dr. Muhammad Bin Abdullah',
-    value: 'PD12345',
-  },
-  {
-    label: 'Dr. Noor Hisham Abdullah',
-    value: 'NR12345',
-  },
-];
 
 type QueueInformationNavigationProp = StackNavigationProp<
   TakeNumberStackParamList,
@@ -55,31 +34,25 @@ const QueueInformationScreen = ({route}: QueueInformationProps) => {
   const [hospitalName, setHospitalName] = useState('');
   const [hospitalAddress, setHospitalAddress] = useState('');
   const [visitPurpose, setVisitpurpose] = useState('');
-  const [selectedSpecialist, setSelectedSpecialist] = useState(null);
+  const [specialists, setSpecialists] = useState<
+    Array<{label: string; value: string}>
+  >([]);
+  const [doctors, setDoctors] = useState<any>([]);
+  const [selectedSpecialist, setSelectedSpecialist] = useState<string | null>(
+    null,
+  );
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [agreeConsequences, setAgreeConsequences] = useState(false);
   const [agreeTNC, setAgreeTNC] = useState(false);
 
   useEffect(() => {
-    const getHospitalInformation = async () => {
-      const hospitalRef = Firebase.firestore()
-        .collection('hospitals')
-        .doc(route.params.hospitalID);
-
-      const hospitalDoc = await hospitalRef.get();
-
-      if (hospitalDoc) {
-        const hospitalData = hospitalDoc.data();
-        if (hospitalData) {
-          setHospitalName(hospitalData.name);
-          setHospitalAddress(hospitalData.address);
-        }
-      } else {
-        console.log('no such document :(');
-      }
-    };
-
-    getHospitalInformation();
+    getHospitalInformation(
+      route.params.hospitalID,
+      setHospitalName,
+      setHospitalAddress,
+      setSpecialists,
+      setDoctors,
+    );
   }, [route.params.hospitalID]);
 
   return (
@@ -103,9 +76,12 @@ const QueueInformationScreen = ({route}: QueueInformationProps) => {
         <View style={Style.questionBox}>
           <Text>Specialist</Text>
           <Dropdown
-            items={Specialist}
+            items={specialists}
             selectedItem={selectedSpecialist}
-            handleChange={setSelectedSpecialist}
+            handleChange={(newItem) => {
+              setSelectedSpecialist(newItem);
+              setSelectedDoctor(null);
+            }}
             disabled={visitPurpose === '' ? true : false}
             placeholder="Select Specialist"
             searchablePlaceholder="Search Specialist"
@@ -114,7 +90,11 @@ const QueueInformationScreen = ({route}: QueueInformationProps) => {
         <View style={Style.questionBox}>
           <Text>Doctor of Preference</Text>
           <Dropdown
-            items={Doctors}
+            items={
+              selectedSpecialist === null
+                ? []
+                : doctors[`${selectedSpecialist}`]
+            }
             selectedItem={selectedDoctor}
             handleChange={setSelectedDoctor}
             disabled={

@@ -6,7 +6,7 @@ import Style from './Dropdown.style';
 type Props = {
   items: Array<{label: any; value: any}>;
   selectedItem: any;
-  handleChange?: Function;
+  handleChange?: (newItem: any) => void;
   placeholder: string;
   searchablePlaceholder?: string;
   disabled?: boolean;

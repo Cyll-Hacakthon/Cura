@@ -27,6 +27,7 @@ import thunk from 'redux-thunk';
 import firebase from './util/firebase';
 import {createFirestoreInstance} from 'redux-firestore';
 import {ReactReduxFirebaseProvider} from 'react-redux-firebase';
+import {YellowBox} from 'react-native';
 
 //Store Creation
 const initialState = {};
@@ -49,6 +50,7 @@ const App = () => {
   const [loadFont] = useFonts(customFont);
   const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
 
+  YellowBox.ignoreWarnings(['Setting a timer']);
   useEffect(() => {
     setTimeout(() => {
       setTimeFinishLoad(true);
