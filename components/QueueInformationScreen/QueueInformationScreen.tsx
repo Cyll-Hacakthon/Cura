@@ -59,8 +59,10 @@ const QueueInformationScreen = ({route}: QueueInformationProps) => {
     <View>
       <TopBox>
         <View style={Style.hospitalInfo}>
-          <Text style={Style.hospitalName}>{hospitalName}</Text>
-          <Text style={Style.hospitalAddress}>{hospitalAddress}</Text>
+          <Text style={Style.hospitalName}>{hospitalName || 'Loading...'}</Text>
+          <Text style={Style.hospitalAddress}>
+            {hospitalAddress || 'Loading...'}
+          </Text>
         </View>
       </TopBox>
       <Card style={Style.cardStyle}>
