@@ -72,6 +72,10 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
   };
 
   const handleHospitalSearch = () => {
+    if (searchTarget.trim() === '') {
+      setSearchResult([]);
+      return;
+    }
     setSearchResult(hospitalSearch(searchTarget, hospitalList));
   };
 
@@ -108,6 +112,13 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
               coordinate={{
                 latitude: hospital.location.latitude,
                 longitude: hospital.location.longitude,
+              }}
+              onPress={() => {
+                setSelectedHospital(hospital);
+                setFocusedLocation({
+                  latitude: hospital.location.latitude,
+                  longitude: hospital.location.longitude,
+                });
               }}
               title={hospital.name}
               description={hospital.address}

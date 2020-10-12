@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Style from './QueueInformation.style';
 import {View, Text, TextInput} from 'react-native';
+import TakeNumberStackParamList from '../Parts/TakeNumberContainer/RootStackParamList';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
+import Firebase from '../../util/firebase';
 
 import TopBox from '../Parts/TopBox/TopBox';
 import Card from '../Parts/Card/Card';
 import Dropdown from '../Parts/Dropdown/Dropdown';
 import Checkbox from '@react-native-community/checkbox';
+import RootStackParamList from '../Parts/TakeNumberContainer/RootStackParamList';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 //Dummy Data
 const Specialist = [
@@ -30,20 +36,58 @@ const Doctors = [
   },
 ];
 
-const QueueInformationScreen = () => {
+type QueueInformationNavigationProp = StackNavigationProp<
+  TakeNumberStackParamList,
+  'Queue Information'
+>;
+
+type QueueInformationRouteProp = RouteProp<
+  RootStackParamList,
+  'Queue Information'
+>;
+
+type QueueInformationProps = {
+  navigation: QueueInformationNavigationProp;
+  route: QueueInformationRouteProp;
+};
+
+const QueueInformationScreen = ({route}: QueueInformationProps) => {
+  const [hospitalName, setHospitalName] = useState('');
+  const [hospitalAddress, setHospitalAddress] = useState('');
+  const [visitPurpose, setVisitpurpose] = useState('');
   const [selectedSpecialist, setSelectedSpecialist] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [agreeConsequences, setAgreeConsequences] = useState(false);
   const [agreeTNC, setAgreeTNC] = useState(false);
 
+  useEffect(() => {
+    const getHospitalInformation = async () => {
+      const hospitalRef = Firebase.firestore()
+        .collection('hospitals')
+        .doc(route.params.hospitalID);
+
+      const hospitalDoc = await hospitalRef.get();
+
+      if (hospitalDoc) {
+        const hospitalData = hospitalDoc.data();
+        if (hospitalData) {
+          setHospitalName(hospitalData.name);
+          setHospitalAddress(hospitalData.address);
+        }
+      } else {
+        console.log('no such document :(');
+      }
+    };
+
+    getHospitalInformation();
+  }, [route.params.hospitalID]);
+
   return (
     <View>
       <TopBox>
         <View style={Style.hospitalInfo}>
-          <Text style={Style.hospitalName}>Island Hospital</Text>
-          <Text style={Style.hospitalAddress}>
-            308, Jalan Macalister, 10450 George Town, Pulau Pinang
-          </Text>
+          <Text style={Style.hospitalName}>{hospitalName}</Text>
+          <Text style={Style.hospitalAddress}>{hospitalAddress}</Text>
         </View>
       </TopBox>
       <Card style={Style.cardStyle}>
@@ -52,6 +96,8 @@ const QueueInformationScreen = () => {
           <TextInput
             style={Style.textInputStyle}
             placeholder="eg: Skin Allergy, Nausea"
+            value={visitPurpose}
+            onChangeText={(newValue) => setVisitpurpose(newValue)}
           />
         </View>
         <View style={Style.questionBox}>
@@ -60,6 +106,7 @@ const QueueInformationScreen = () => {
             items={Specialist}
             selectedItem={selectedSpecialist}
             handleChange={setSelectedSpecialist}
+            disabled={visitPurpose === '' ? true : false}
             placeholder="Select Specialist"
             searchablePlaceholder="Search Specialist"
           />
@@ -70,6 +117,9 @@ const QueueInformationScreen = () => {
             items={Doctors}
             selectedItem={selectedDoctor}
             handleChange={setSelectedDoctor}
+            disabled={
+              visitPurpose === '' || selectedSpecialist === null ? true : false
+            }
             placeholder="Select Doctor"
             searchablePlaceholder="Search Doctor"
           />
@@ -92,9 +142,11 @@ const QueueInformationScreen = () => {
           />
           <Text>I agree to Terms & Conditions</Text>
         </View>
-        <View style={Style.buttonBox}>
-          <Text style={Style.buttonText}>Take Number</Text>
-        </View>
+        <TouchableOpacity>
+          <View style={Style.buttonBox}>
+            <Text style={Style.buttonText}>Take Number</Text>
+          </View>
+        </TouchableOpacity>
       </Card>
     </View>
   );

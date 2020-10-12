@@ -9,6 +9,7 @@ type Props = {
   handleChange?: Function;
   placeholder: string;
   searchablePlaceholder?: string;
+  disabled?: boolean;
 };
 
 const Dropdown = ({
@@ -17,6 +18,7 @@ const Dropdown = ({
   handleChange,
   placeholder,
   searchablePlaceholder,
+  disabled = false,
 }: Props) => {
   return (
     <DropDownPicker
@@ -27,6 +29,7 @@ const Dropdown = ({
       containerStyle={Style.containerStyle}
       itemStyle={Style.itemStyle}
       dropDownStyle={Style.dropdownStyle}
+      disabled={disabled}
       onChangeItem={(newItem) => {
         if (handleChange) {
           handleChange(newItem.value);
