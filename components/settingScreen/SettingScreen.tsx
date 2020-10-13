@@ -12,6 +12,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface IOptionButtonBox {
   iconName: string;
+  iconColor?: string;
   boxTitle: string;
   children?: React.ReactElement;
   pressAction?: Function;
@@ -58,6 +59,7 @@ const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
 
   const OptionButtonBox = ({
     iconName,
+    iconColor = 'black',
     boxTitle,
     children,
     pressAction,
@@ -76,7 +78,12 @@ const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
           pressAction ? pressAction() : null;
         }}>
         <View style={Style.optionButton}>
-          <Feather style={Style.iconContainer} name={iconName} size={20} />
+          <Feather
+            style={Style.iconContainer}
+            color={iconColor}
+            name={iconName}
+            size={20}
+          />
           <Text style={Style.wordContainer}>{boxTitle}</Text>
           {children ? children : ArrowIcon}
         </View>
@@ -108,6 +115,7 @@ const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
           <OptionButtonBox iconName="database" boxTitle="Data Management" />
           <OptionButtonBox
             iconName="x-square"
+            iconColor="red"
             boxTitle="Logout"
             pressAction={() => {
               logoutUser();

@@ -4,7 +4,8 @@ import {CuraColor, Font} from '../../util';
 const QueueInformationScreenStyle = StyleSheet.create({
   hospitalName: {
     ...Font.Heading3,
-    fontSize: 25,
+    ...Font.Bold,
+    fontSize: 20,
     color: CuraColor.White,
     textAlign: 'center',
     width: 300,

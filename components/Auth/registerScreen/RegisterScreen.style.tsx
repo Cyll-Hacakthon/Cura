@@ -1,7 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {CuraColor, Font} from '../../../util';
+import {Dimensions} from 'react-native';
 
 const RegisterScreenStyle = StyleSheet.create({
+  customCardStyle: {
+    height: (75 / 100) * Dimensions.get('screen').height,
+  },
   titleText: {
     ...Font.Heading3,
     ...Font.Bold,
@@ -23,6 +27,14 @@ const RegisterScreenStyle = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 15,
     alignItems: 'center',
+  },
+  addressInputBox: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingHorizontal: 8,
+    borderRadius: 10,
+    width: 120,
+    height: 40,
   },
   dateInputStyle: {
     borderWidth: 1,
@@ -59,6 +71,21 @@ const RegisterScreenStyle = StyleSheet.create({
   underlineText: {
     textDecorationLine: 'underline',
     color: 'blue',
+  },
+  labelText: {
+    marginTop: 15,
+  },
+  horizontalLine: {
+    marginLeft: 10,
+    flex: 1,
+    marginBottom: 8,
+    //borderTopColor: 'grey',
+    //borderTopWidth: 1,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+  },
+  labelBox: {
+    flexDirection: 'row',
   },
 });
 
