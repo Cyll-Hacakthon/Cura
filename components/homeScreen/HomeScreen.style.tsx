@@ -49,6 +49,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 10,
     marginTop: 10,
+    marginBottom: 10,
     justifyContent: 'space-between',
   },
   questionListTitle: {

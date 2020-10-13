@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {connect, ConnectedProps} from 'react-redux';
 
@@ -7,6 +7,7 @@ import Style from './HomeScreen.style';
 import {RootState} from '../../store/reducers/rootReducer';
 import {RootStackParamList} from '../../util';
 import SelectionBox from '../Parts/SelectionBox/SelectionBox';
+import HealthStatPanel from '../Parts/HealthStatPanel/HealthStatPanel';
 
 const userImage = require('../../assets/images/userProfileImage.jpg');
 
@@ -46,16 +47,15 @@ const HomeScreen = ({username}: HomeScreenProps) => {
   return (
     <>
       <View style={Style.container}>
-        <ScrollView>
-          <View style={Style.topBox}>
-            <NameBox />
-          </View>
-          <View style={Style.rowContainer}>
-            <SelectionBox title="Medical Report" iconName="favorite" />
-            <SelectionBox title="Take Number" iconName="assignment" />
-            <SelectionBox title="Personal Data" iconName="storage" />
-          </View>
-        </ScrollView>
+        <View style={Style.topBox}>
+          <NameBox />
+        </View>
+        <View style={Style.rowContainer}>
+          <SelectionBox title="Medical Report" iconName="favorite" />
+          <SelectionBox title="Take Number" iconName="assignment" />
+          <SelectionBox title="Personal Data" iconName="storage" />
+        </View>
+        <HealthStatPanel />
       </View>
     </>
   );

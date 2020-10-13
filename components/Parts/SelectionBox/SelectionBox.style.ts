@@ -9,7 +9,6 @@ const SelectionBoxStyle = StyleSheet.create({
     width: (30 / 100) * Dimensions.get('screen').width,
     borderRadius: 15,
     marginLeft: 0,
-    marginBottom: 50,
     shadowColor: 'rgba(0, 0, 0, 0.1)',
     shadowOffset: {width: 3, height: 20},
     shadowOpacity: 0.8,
