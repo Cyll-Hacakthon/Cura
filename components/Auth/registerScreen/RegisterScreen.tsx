@@ -24,6 +24,7 @@ type RegisterScreenProps = {
 const RegisterScreen = ({navigation}: RegisterScreenProps) => {
   const [name, setName] = useState('');
   const [icNumber, setIC] = useState('');
+  const [mobileNum, setMobileNum] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -51,7 +52,7 @@ const RegisterScreen = ({navigation}: RegisterScreenProps) => {
           const data: RegisterInformationType = {
             id: uid,
             ic: icNumber,
-            gender: Number(icLastFourDigit) % 2 === 1 ? 'male' : 'female',
+            gender: Number(icLastFourDigit) % 2 === 1 ? 'male' : 'female', // Only work for Malaysian, which is the scenario for current prototype
             email,
             name,
             birthdate: Firebase.firestore.Timestamp.fromDate(
@@ -61,7 +62,7 @@ const RegisterScreen = ({navigation}: RegisterScreenProps) => {
                 Number(splitBirthdate[0]), // Date
               ),
             ),
-
+            phoneNum: mobileNum,
             address: `${address.home}, ${address.postal}, ${address.city}, ${address.state}`,
           };
           const usersRef = Firebase.firestore().collection('users');
@@ -125,6 +126,14 @@ const RegisterScreen = ({navigation}: RegisterScreenProps) => {
               customStyles={{dateInput: Style.dateInputStyle}}
             />
           </View>
+          <TextInput
+            style={Style.inputStyle}
+            placeholder="Mobile Phone Number"
+            value={mobileNum}
+            onChangeText={(newValue) => {
+              setMobileNum(newValue);
+            }}
+          />
           <TextInput
             style={Style.inputStyle}
             placeholder="Email, eg: johndoe@email.com"

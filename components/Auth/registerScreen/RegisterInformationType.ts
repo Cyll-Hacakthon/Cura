@@ -6,4 +6,5 @@ export type RegisterInformationType = {
   address: string;
   ic: string;
   gender: 'male' | 'female';
+  phoneNum: string;
 };
