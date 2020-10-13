@@ -1,17 +1,12 @@
 import React from 'react';
-import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-
-import Style from './HomeScreen.style';
-import {LinearGradient} from 'expo-linear-gradient';
-import {Font} from '../../util';
-import {MaterialIcons} from '@expo/vector-icons';
-import {RootStackParamList} from '../../util';
-import QuestionList from '../Parts/QuestionList/QuestionList';
-
 import {connect, ConnectedProps} from 'react-redux';
 
+import Style from './HomeScreen.style';
 import {RootState} from '../../store/reducers/rootReducer';
+import {RootStackParamList} from '../../util';
+import SelectionBox from '../Parts/SelectionBox/SelectionBox';
 
 const userImage = require('../../assets/images/userProfileImage.jpg');
 
@@ -28,11 +23,6 @@ interface IPropsSelect {
   recordType: string;
   iconType: string;
 }
-
-const DummyData = [
-  {title: 'Why am I Dizzy after taking a nap?', viewsCount: '100k'},
-  {title: "Why Can't I See when I close my Eye", viewsCount: '200k'},
-];
 
 const HomeScreen = ({username}: HomeScreenProps) => {
   const NameBox = () => {
@@ -53,23 +43,6 @@ const HomeScreen = ({username}: HomeScreenProps) => {
     );
   };
 
-  const SelectionBox = ({recordType, iconType}: IPropsSelect) => {
-    return (
-      <LinearGradient
-        colors={['#2EF442', '#41CCA2']}
-        style={Style.selectionBox}>
-        <TouchableOpacity>
-          <Text style={{...Font.Heading3, ...Style.recordTypeText}}>
-            {recordType}
-          </Text>
-          <View style={Style.iconContainer}>
-            <MaterialIcons name={iconType} size={70} color="white" />
-          </View>
-        </TouchableOpacity>
-      </LinearGradient>
-    );
-  };
-
   return (
     <>
       <View style={Style.container}>
@@ -78,15 +51,10 @@ const HomeScreen = ({username}: HomeScreenProps) => {
             <NameBox />
           </View>
           <View style={Style.rowContainer}>
-            <SelectionBox recordType="Heart Rate" iconType="favorite" />
-            <SelectionBox recordType="Exercise Rate" iconType="accessibility" />
+            <SelectionBox title="Medical Report" iconName="favorite" />
+            <SelectionBox title="Take Number" iconName="assignment" />
+            <SelectionBox title="Personal Data" iconName="storage" />
           </View>
-          <View style={Style.rowContainer}>
-            <SelectionBox recordType="Sleep Quality" iconType="brightness-2" />
-            <SelectionBox recordType="Stress Level" iconType="poll" />
-          </View>
-          <Text style={Style.questionListTitle}>Recent Questions</Text>
-          <QuestionList questionData={DummyData} />
         </ScrollView>
       </View>
     </>
