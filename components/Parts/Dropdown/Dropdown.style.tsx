@@ -6,7 +6,6 @@ const DropdownStyle = StyleSheet.create({
     marginTop: 5,
   },
   pickerStyle: {
-    backgroundColor: 'white',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
