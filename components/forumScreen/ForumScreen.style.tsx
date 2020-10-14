@@ -1,11 +1,10 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {CuraColor} from '../../util';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: CuraColor.White,
-    zIndex: 0,
   },
   navbar: {
     flex: 0.1,
@@ -16,49 +15,38 @@ export default StyleSheet.create({
     color: CuraColor.White,
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
-    paddingTop: 30,
     alignItems: 'center',
-  },
-  panel: {
-    width: '90%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    //borderWidth: 1,
+    justifyContent: 'center',
+    padding: 0,
   },
   title: {
+    position: 'absolute',
+    padding: 30,
+    marginTop: 5,
     color: 'white',
   },
   addButton: {
-    alignSelf: 'center',
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    padding: 30,
+    marginTop: 15,
   },
   searchSection: {
+    flex: 1,
     flexDirection: 'row',
     alignSelf: 'center',
     backgroundColor: '#fff',
+    position: 'absolute',
     borderRadius: 10,
-    marginRight: 5,
-  },
-  categoryBox: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    position: 'relative',
+    marginTop: 100,
   },
   searchIcon: {
     padding: 10,
   },
   input: {
-    width: (45 / 100) * Dimensions.get('screen').width,
+    width: '75%',
     padding: 10,
     backgroundColor: '#fff',
     color: '#424242',
-    borderRadius: 10,
-  },
-  categoryDropdownCustom: {
-    height: 50,
-    marginTop: 0,
-    borderRadius: 10,
-  },
-  questionPanelTopMargin: {
-    marginTop: 15,
   },
 });

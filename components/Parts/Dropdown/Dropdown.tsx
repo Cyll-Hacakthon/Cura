@@ -10,8 +10,6 @@ type Props = {
   placeholder: string;
   searchablePlaceholder?: string;
   disabled?: boolean;
-  zIndex?: number;
-  style?: Object;
 };
 
 const Dropdown = ({
@@ -21,7 +19,6 @@ const Dropdown = ({
   placeholder,
   searchablePlaceholder,
   disabled = false,
-  style,
 }: Props) => {
   return (
     <DropDownPicker
@@ -29,7 +26,7 @@ const Dropdown = ({
       defaultValue={selectedItem}
       placeholder={placeholder}
       style={Style.pickerStyle}
-      containerStyle={{...Style.containerStyle, ...style}}
+      containerStyle={Style.containerStyle}
       itemStyle={Style.itemStyle}
       dropDownStyle={Style.dropdownStyle}
       disabled={disabled}
