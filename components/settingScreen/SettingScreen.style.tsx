@@ -77,7 +77,7 @@ const curaStyle = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderTopColor: '#777777',
+    borderTopColor: '#dddddd',
     borderTopWidth: 1,
   },
   iconContainer: {
