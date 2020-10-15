@@ -97,19 +97,6 @@ const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
         <TopBox />
         <View style={Style.optionSelectionBox}>
           <MainButtonBox />
-          <OptionButtonBox
-            iconName="eye"
-            boxTitle="Healthcare Data Tracing"
-            pressAction={toggleSwitch}>
-            <Switch
-              style={Style.iconContainer}
-              trackColor={{false: '#767577', true: CuraColor.LightGreen}}
-              thumbColor={trackingIsEnable ? CuraColor.DarkGreen : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={trackingIsEnable}
-            />
-          </OptionButtonBox>
           <OptionButtonBox iconName="user" boxTitle="Personal Information" />
           <OptionButtonBox iconName="list" boxTitle="Healthcare Records" />
           <OptionButtonBox iconName="database" boxTitle="Data Management" />
