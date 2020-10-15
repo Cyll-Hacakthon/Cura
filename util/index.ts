@@ -41,8 +41,9 @@ export const Font = StyleSheet.create({
 });
 
 export type RootStackParamList = {
-  HomeScreen: undefined;
-  ForumScreen: undefined;
-  TakeNumberScreen: undefined;
-  SettingScreen: undefined;
+  Home: undefined;
+  Form: undefined;
+  'Take Number': undefined;
+  Notification: undefined;
+  Setting: undefined;
 };

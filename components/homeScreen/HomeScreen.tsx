@@ -18,14 +18,11 @@ type HomeScreenNavigationProp = StackNavigationProp<
   'HomeScreen'
 >;
 
-type HomeScreenProps = PropsFromRedux & {};
+type HomeScreenProps = PropsFromRedux & {
+  navigation: HomeScreenNavigationProp;
+};
 
-interface IPropsSelect {
-  recordType: string;
-  iconType: string;
-}
-
-const HomeScreen = ({username}: HomeScreenProps) => {
+const HomeScreen = ({username, navigation}: HomeScreenProps) => {
   const NameBox = () => {
     return (
       <View style={Style.nameBox}>
@@ -52,7 +49,13 @@ const HomeScreen = ({username}: HomeScreenProps) => {
         </View>
         <View style={Style.rowContainer}>
           <SelectionBox title="Medical Report" iconName="favorite" />
-          <SelectionBox title="Take Number" iconName="assignment" />
+          <SelectionBox
+            title="Take Number"
+            iconName="assignment"
+            onPress={() => {
+              navigation.navigate('Take Number');
+            }}
+          />
           <SelectionBox title="Personal Data" iconName="storage" />
         </View>
         <HealthStatPanel />
