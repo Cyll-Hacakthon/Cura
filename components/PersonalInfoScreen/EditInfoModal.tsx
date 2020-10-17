@@ -175,34 +175,33 @@ const MultipleInputBox = ({label, values, setValues}: MultipleInputBox) => {
   return (
     <View style={{...Style.horizontalWrap, ...Style.botMargin}}>
       <Text style={{...Style.inputLabel, ...Style.multipleInputLabel}}>
-        {label}:{' '}
+        {label}
       </Text>
       <View style={Style.inputWrap}>
-        {list.length !== 0
-          ? list.map((element) => {
-              return (
-                <TextInput
-                  key={element.id}
-                  style={Style.textInput}
-                  value={element.value}
-                  onChangeText={(newValue) => {
-                    setValues({
-                      ...values,
-                      list: list.map((value) => {
-                        if (value.id === element.id) {
-                          return {
-                            id: value.id,
-                            value: newValue,
-                          };
-                        }
-                        return value;
-                      }),
-                    });
-                  }}
-                />
-              );
-            })
-          : null}
+        {list.length !== 0 &&
+          list.map((element) => {
+            return (
+              <TextInput
+                key={element.id}
+                style={Style.textInput}
+                value={element.value}
+                onChangeText={(newValue) => {
+                  setValues({
+                    ...values,
+                    list: list.map((value) => {
+                      if (value.id === element.id) {
+                        return {
+                          id: value.id,
+                          value: newValue,
+                        };
+                      }
+                      return value;
+                    }),
+                  });
+                }}
+              />
+            );
+          })}
         <Feather
           name="plus"
           size={20}
@@ -222,10 +221,6 @@ const listMapping = (value: string, index: number) => {
     id: index,
     value,
   };
-};
-
-const valueMapping = (element: {value: string; id: number}) => {
-  return element.value;
 };
 
 const Style = StyleSheet.create({

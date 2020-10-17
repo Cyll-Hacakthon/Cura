@@ -150,11 +150,6 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
                 <Feather name="x-circle" size={20} color="white" />
               </TouchableOpacity>
             </View>
-            {/* <View style={Style.selectedHospitalConfirmButton}>
-              <TouchableOpacity onPress={() => handleProceedTakeNumber()}>
-                <Feather name="check" size={20} color="white" />
-              </TouchableOpacity>
-            </View> */}
           </View>
         </View>
       ) : null}

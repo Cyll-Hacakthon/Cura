@@ -43,7 +43,6 @@ const PersonalInfoScreen = () => {
             <Text style={Style.email}>sclim.richard@gmail.com</Text>
           </View>
         </View>
-        <View style={Style.horizontalLine} />
         <View style={Style.infoSection}>
           <InformationBar label="Age" info={[info.age]} />
           <InformationBar label="Blood Type" info={[info.bloodType.value]} />
@@ -84,7 +83,7 @@ type InformationBarProps = {
 const InformationBar = ({label, info}: InformationBarProps) => {
   return (
     <View style={Style.horizontalWrap}>
-      <Text style={Style.infoLabel}>{label}: </Text>
+      <Text style={Style.infoLabel}>{label} </Text>
       <View style={Style.infoValue}>
         {info.length !== 0 ? (
           info.map((data, index) => {

@@ -35,7 +35,7 @@ const PersonalInfoScreenStyle = StyleSheet.create({
   },
   infoValue: {
     flex: 5,
-    backgroundColor: 'white',
+    backgroundColor: '#eaeaea',
     paddingVertical: 5,
     borderRadius: 10,
   },
@@ -57,9 +57,14 @@ const PersonalInfoScreenStyle = StyleSheet.create({
     paddingLeft: 15,
     paddingVertical: 15,
     borderRadius: 10,
+    marginBottom: 20,
   },
   infoSection: {
     marginBottom: 50,
+    backgroundColor: 'white',
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderRadius: 10,
   },
 });
 
