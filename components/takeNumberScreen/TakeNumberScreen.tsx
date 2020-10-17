@@ -150,44 +150,65 @@ const TakeNumberScreen = ({navigation}: TakeNumberProps) => {
                 <Feather name="x-circle" size={20} color="white" />
               </TouchableOpacity>
             </View>
-            <View style={Style.selectedHospitalConfirmButton}>
+            {/* <View style={Style.selectedHospitalConfirmButton}>
               <TouchableOpacity onPress={() => handleProceedTakeNumber()}>
                 <Feather name="check" size={20} color="white" />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
         </View>
       ) : null}
 
       <View style={Style.uiLayer}>
-        <Card style={Style.searchBoxCard}>
-          <View style={Style.searchInputBox}>
-            <TextInput
-              style={Style.searchInput}
-              placeholder="Search Hospital"
-              value={searchTarget}
-              onChangeText={(newValue) => {
-                setSearchTarget(newValue);
-              }}
-            />
-            <MaterialIcons
-              style={Style.searchIcon}
-              name="search"
-              size={25}
-              color="black"
-            />
-          </View>
-          <View style={Style.proceedButtonBox}>
-            <TouchableOpacity
-              onPress={() => {
-                Keyboard.dismiss();
-                setShowHospitalListCard(true);
-                handleHospitalSearch();
-              }}>
-              <Text style={Style.proceedButton}>Search</Text>
-            </TouchableOpacity>
-          </View>
-        </Card>
+        {selectedHospital === null ? (
+          <Card style={Style.searchBoxCard}>
+            <View style={Style.searchInputBox}>
+              <TextInput
+                style={Style.searchInput}
+                placeholder="Search Hospital"
+                value={searchTarget}
+                onChangeText={(newValue) => {
+                  setSearchTarget(newValue);
+                }}
+              />
+              <MaterialIcons
+                style={Style.searchIcon}
+                name="search"
+                size={25}
+                color="black"
+              />
+            </View>
+            <View style={Style.proceedButtonBox}>
+              <TouchableOpacity
+                onPress={() => {
+                  Keyboard.dismiss();
+                  setShowHospitalListCard(true);
+                  handleHospitalSearch();
+                }}>
+                <Text style={Style.proceedButton}>Search</Text>
+              </TouchableOpacity>
+            </View>
+          </Card>
+        ) : (
+          <Card style={Style.searchBoxCard}>
+            <View style={Style.horizontalWrap}>
+              <Text
+                style={Style.cancelButton}
+                onPress={() => {
+                  setSelectedHospital(null);
+                }}>
+                Cancel
+              </Text>
+              <Text
+                style={Style.confirmButton}
+                onPress={() => {
+                  handleProceedTakeNumber();
+                }}>
+                Confirm
+              </Text>
+            </View>
+          </Card>
+        )}
       </View>
     </>
   );

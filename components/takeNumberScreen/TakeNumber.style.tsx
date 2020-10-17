@@ -96,6 +96,28 @@ const TakeNumberScreenStyle = StyleSheet.create({
     flex: 0.2,
     marginLeft: 2,
   },
+  cancelButton: {
+    backgroundColor: 'red',
+    color: 'white',
+    textAlign: 'center',
+    padding: 5,
+    paddingHorizontal: 10,
+    fontSize: 15,
+    borderRadius: 10,
+    marginRight: 10,
+  },
+  confirmButton: {
+    backgroundColor: CuraColor.Green,
+    color: 'white',
+    textAlign: 'center',
+    padding: 5,
+    paddingHorizontal: 10,
+    fontSize: 15,
+    borderRadius: 10,
+  },
+  horizontalWrap: {
+    flexDirection: 'row',
+  },
 });
 
 export default TakeNumberScreenStyle;
