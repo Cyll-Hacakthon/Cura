@@ -5,7 +5,7 @@ import {connect, ConnectedProps} from 'react-redux';
 
 import Style from './HomeScreen.style';
 import {RootState} from '../../store/reducers/rootReducer';
-import {RootStackParamList} from '../../util';
+import {RootStackParamList} from '../Parts/HomeContainer/RootStackParamList';
 import SelectionBox from '../Parts/SelectionBox/SelectionBox';
 import HealthStatPanel from '../Parts/HealthStatPanel/HealthStatPanel';
 
@@ -13,10 +13,7 @@ const userImage = require('../../assets/images/userProfileImage.jpg');
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type HomeScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'HomeScreen'
->;
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 type HomeScreenProps = PropsFromRedux & {
   navigation: HomeScreenNavigationProp;
@@ -48,7 +45,7 @@ const HomeScreen = ({username, navigation}: HomeScreenProps) => {
           <NameBox />
         </View>
         <View style={Style.rowContainer}>
-          <SelectionBox title="Medical Report" iconName="favorite" />
+          <SelectionBox title="Medical Reports" iconName="favorite" />
           <SelectionBox
             title="Take Number"
             iconName="assignment"
@@ -56,7 +53,13 @@ const HomeScreen = ({username, navigation}: HomeScreenProps) => {
               navigation.navigate('Take Number');
             }}
           />
-          <SelectionBox title="Personal Data" iconName="storage" />
+          <SelectionBox
+            title="Personal Information"
+            iconName="storage"
+            onPress={() => {
+              navigation.navigate('Personal Info');
+            }}
+          />
         </View>
         <HealthStatPanel />
       </View>

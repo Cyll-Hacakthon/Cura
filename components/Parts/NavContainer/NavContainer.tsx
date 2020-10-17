@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Feather} from '@expo/vector-icons';
 import {CuraColor} from '../../../util';
 
-import HomeScreen from '../../homeScreen/HomeScreen';
+import HomeContainer from '../HomeContainer/HomeContainer';
 import ForumScreen from '../../forumScreen/ForumScreen';
 import SettingScreen from '../../settingScreen/SettingScreen';
 import TakeNumberContainer from '../../Parts/TakeNumberContainer/TakeNumberContainer';
@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const NavContainer = () => {
   const screens = [
-    {name: 'Home', component: HomeScreen},
+    {name: 'Home', component: HomeContainer},
     {name: 'Forum', component: ForumScreen},
     {name: 'Take Number', component: TakeNumberContainer},
     {name: 'Notification', component: NotificationScreen}, // Change Component
