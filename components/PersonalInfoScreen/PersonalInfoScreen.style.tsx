@@ -66,6 +66,10 @@ const PersonalInfoScreenStyle = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
   },
+  greenBorder: {
+    borderColor: CuraColor.Green,
+    borderWidth: 1,
+  },
 });
 
 export default PersonalInfoScreenStyle;

@@ -12,7 +12,7 @@ const DummyData = {
   age: 19,
   bloodType: {
     value: 'O+',
-    verified: false,
+    verified: true,
   },
   weight: {
     value: 43.3,
@@ -23,7 +23,7 @@ const DummyData = {
     lastUpdated: 'test',
   },
   allergy: ['Peanut', 'Shrimp'],
-  disability: ['Partially Deaf'],
+  disability: [],
   emergencyContact: ['012-3456789'],
   language: ['Chinese', 'Malay', 'English'],
   disease: [],
@@ -45,7 +45,11 @@ const PersonalInfoScreen = () => {
         </View>
         <View style={Style.infoSection}>
           <InformationBar label="Age" info={[info.age]} />
-          <InformationBar label="Blood Type" info={[info.bloodType.value]} />
+          <InformationBar
+            label="Blood Type"
+            info={[`${info.bloodType.value}`]}
+            verified={info.bloodType.verified}
+          />
           <InformationBar label="Weight(KG)" info={[info.weight.value]} />
           <InformationBar label="Height(M)" info={[info.height.value]} />
           <InformationBar label="Allergy" info={[...info.allergy]} />
@@ -78,13 +82,16 @@ const PersonalInfoScreen = () => {
 type InformationBarProps = {
   label: string;
   info: Array<string | number>;
+  verified?: boolean;
 };
 
-const InformationBar = ({label, info}: InformationBarProps) => {
+const InformationBar = ({label, info, verified}: InformationBarProps) => {
+  const border = verified ? Style.greenBorder : {};
+
   return (
     <View style={Style.horizontalWrap}>
       <Text style={Style.infoLabel}>{label} </Text>
-      <View style={Style.infoValue}>
+      <View style={{...Style.infoValue, ...border}}>
         {info.length !== 0 ? (
           info.map((data, index) => {
             return (

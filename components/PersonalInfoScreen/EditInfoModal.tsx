@@ -10,7 +10,6 @@ import {
 import {CuraColor} from '../../util';
 import {PersonalInfoType} from './PersonalInfoType';
 import {Feather} from '@expo/vector-icons';
-import {FadeOutToBottomAndroidSpec} from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs';
 
 type EditInfoModalProps = {
   info: PersonalInfoType;
@@ -25,6 +24,7 @@ const EditInfoModal = ({
   visible,
   toggleVisible,
 }: EditInfoModalProps) => {
+  const [bloodType, setBloodType] = useState(info.bloodType.value);
   const [weight, setWeight] = useState({
     value: info.weight.value,
     lastUpdated: info.weight.lastUpdated,
@@ -59,6 +59,16 @@ const EditInfoModal = ({
       <Modal visible={visible}>
         <ScrollView style={Style.container}>
           <Text style={Style.title}>Update Personal Information</Text>
+          {!info.bloodType.verified && (
+            <InputBox
+              label="Blood Type"
+              placeholder=""
+              value={bloodType}
+              onChange={(newValue: any) => {
+                setBloodType(newValue);
+              }}
+            />
+          )}
           <InputBox
             label="Weight"
             placeholder="in KG"
