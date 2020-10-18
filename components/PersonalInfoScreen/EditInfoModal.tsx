@@ -11,6 +11,7 @@ import {CuraColor} from '../../util';
 import {PersonalInfoType} from './PersonalInfoType';
 import {Feather} from '@expo/vector-icons';
 import Firebase from '../../util/firebase';
+import {updatePersonalInformation} from './function';
 
 type EditInfoModalProps = {
   info: PersonalInfoType;
@@ -59,8 +60,8 @@ const EditInfoModal = ({
     return element.value;
   };
 
-  const handleSubmitInformation = () => {
-    setInfo({
+  const processInfo = () => {
+    return {
       ...info,
       bloodType: {
         ...info.bloodType,
@@ -85,7 +86,12 @@ const EditInfoModal = ({
       emergencyContact: emergencyContact.list.map(listFilterToValue),
       language: language.list.map(listFilterToValue),
       disease: disease.list.map(listFilterToValue),
-    });
+    };
+  };
+
+  const handleSubmitInformation = () => {
+    setInfo(processInfo());
+    updatePersonalInformation(processInfo());
   };
 
   return (
@@ -156,6 +162,7 @@ const EditInfoModal = ({
               style={Style.confirmButton}
               onPress={() => {
                 handleSubmitInformation();
+                //updatePersonalInformation();
                 toggleVisible(false);
               }}>
               Confirm

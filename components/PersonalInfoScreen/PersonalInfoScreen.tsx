@@ -1,38 +1,49 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, View, Text, Image} from 'react-native';
 import Style from './PersonalInfoScreen.style';
 import {PersonalInfoType} from './PersonalInfoType';
 import {Feather} from '@expo/vector-icons';
 import Firebase from '../../util/firebase';
+import {retrievePersonalInformation} from './function';
 
 import EditInfoModal from './EditInfoModal';
 
 const userImage = require('../../assets/images/userProfileImage.jpg');
 
 const DummyData = {
-  age: 19,
+  age: -1,
   bloodType: {
-    value: 'O+',
+    value: 'loading',
     verified: false,
   },
   weight: {
-    value: 43.3,
+    value: -1,
     lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
   },
   height: {
-    value: 162,
+    value: -1,
     lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
   },
-  allergy: ['Peanut', 'Shrimp'],
+  allergy: [],
   disability: [],
-  emergencyContact: ['012-3456789'],
-  language: ['Chinese', 'Malay', 'English'],
+  emergencyContact: [],
+  language: [],
   disease: [],
 };
 
 const PersonalInfoScreen = () => {
   const [info, setInfo] = useState<PersonalInfoType>(DummyData);
   const [modalVisible, setModalVisible] = useState(false);
+  const [loadModal, setloadModal] = useState(false);
+
+  useEffect(() => {
+    const getPersonalInformation = async () => {
+      setInfo(await retrievePersonalInformation());
+      setloadModal(true);
+    };
+
+    getPersonalInformation();
+  }, []);
 
   return (
     <>
@@ -70,12 +81,14 @@ const PersonalInfoScreen = () => {
         }}>
         <Feather name="edit" /> Edit
       </Text>
-      <EditInfoModal
-        visible={modalVisible}
-        info={info}
-        setInfo={setInfo}
-        toggleVisible={setModalVisible}
-      />
+      {loadModal && (
+        <EditInfoModal
+          visible={modalVisible}
+          info={info}
+          setInfo={setInfo}
+          toggleVisible={setModalVisible}
+        />
+      )}
     </>
   );
 };
