@@ -3,6 +3,7 @@ import {ScrollView, View, Text, Image} from 'react-native';
 import Style from './PersonalInfoScreen.style';
 import {PersonalInfoType} from './PersonalInfoType';
 import {Feather} from '@expo/vector-icons';
+import Firebase from '../../util/firebase';
 
 import EditInfoModal from './EditInfoModal';
 
@@ -12,15 +13,15 @@ const DummyData = {
   age: 19,
   bloodType: {
     value: 'O+',
-    verified: true,
+    verified: false,
   },
   weight: {
     value: 43.3,
-    lastUpdated: 'test',
+    lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
   },
   height: {
     value: 162,
-    lastUpdated: 'test',
+    lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
   },
   allergy: ['Peanut', 'Shrimp'],
   disability: [],
@@ -47,7 +48,7 @@ const PersonalInfoScreen = () => {
           <InformationBar label="Age" info={[info.age]} />
           <InformationBar
             label="Blood Type"
-            info={[`${info.bloodType.value}`]}
+            info={[info.bloodType.value]}
             verified={info.bloodType.verified}
           />
           <InformationBar label="Weight(KG)" info={[info.weight.value]} />

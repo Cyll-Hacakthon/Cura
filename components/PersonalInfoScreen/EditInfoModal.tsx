@@ -10,6 +10,7 @@ import {
 import {CuraColor} from '../../util';
 import {PersonalInfoType} from './PersonalInfoType';
 import {Feather} from '@expo/vector-icons';
+import Firebase from '../../util/firebase';
 
 type EditInfoModalProps = {
   info: PersonalInfoType;
@@ -53,6 +54,39 @@ const EditInfoModal = ({
     nextId: info.disease.length,
     list: info.disease.map(listMapping),
   });
+
+  const listFilterToValue = (element: {id: number; value: string}) => {
+    return element.value;
+  };
+
+  const handleSubmitInformation = () => {
+    setInfo({
+      ...info,
+      bloodType: {
+        ...info.bloodType,
+        value: bloodType,
+      },
+      weight: {
+        value: weight.value,
+        lastUpdated:
+          info.weight === weight
+            ? weight.lastUpdated
+            : Firebase.firestore.Timestamp.fromDate(new Date()),
+      },
+      height: {
+        value: height.value,
+        lastUpdated:
+          info.height === height
+            ? height.lastUpdated
+            : Firebase.firestore.Timestamp.fromDate(new Date()),
+      },
+      allergy: allergy.list.map(listFilterToValue),
+      disability: disability.list.map(listFilterToValue),
+      emergencyContact: emergencyContact.list.map(listFilterToValue),
+      language: language.list.map(listFilterToValue),
+      disease: disease.list.map(listFilterToValue),
+    });
+  };
 
   return (
     <>
@@ -121,7 +155,8 @@ const EditInfoModal = ({
             <Text
               style={Style.confirmButton}
               onPress={() => {
-                console.log(allergy);
+                handleSubmitInformation();
+                toggleVisible(false);
               }}>
               Confirm
             </Text>

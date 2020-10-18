@@ -1,3 +1,5 @@
+import Firebase from '../../util/firebase';
+
 export type PersonalInfoType = {
   age: number;
   bloodType: {
@@ -6,11 +8,11 @@ export type PersonalInfoType = {
   };
   weight: {
     value: number;
-    lastUpdated: string;
+    lastUpdated: Firebase.firestore.Timestamp;
   };
   height: {
     value: number;
-    lastUpdated: string;
+    lastUpdated: Firebase.firestore.Timestamp;
   };
   allergy: Array<string>;
   disability: Array<string>;
