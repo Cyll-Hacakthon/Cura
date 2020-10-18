@@ -71,7 +71,7 @@ const PersonalInfoScreen = () => {
             info={[...info.emergencyContact]}
           />
           <InformationBar label="Language" info={[...info.language]} />
-          <InformationBar label="Disease" info={[]} />
+          <InformationBar label="Disease" info={[...info.disease]} />
         </View>
       </ScrollView>
       <Text
