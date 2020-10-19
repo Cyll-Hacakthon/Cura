@@ -45,7 +45,13 @@ const HomeScreen = ({username, navigation}: HomeScreenProps) => {
           <NameBox />
         </View>
         <View style={Style.rowContainer}>
-          <SelectionBox title="Medical Reports" iconName="favorite" />
+          <SelectionBox
+            title="Medical Reports"
+            iconName="favorite"
+            onPress={() => {
+              navigation.navigate('Medical Reports');
+            }}
+          />
           <SelectionBox
             title="Take Number"
             iconName="assignment"
