@@ -1,33 +1,55 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import {View, Text, Modal} from 'react-native';
 import Style from './NumberInformationScreen.style';
+import {getQueueInformation} from './function';
 
 import Card from '../Parts/Card/Card';
 
 const NumberInformationScreen = () => {
   const [showModal, setShowModal] = useState(false);
+  const [hospital, setHospital] = useState('Loading...');
+  const [hospitalAddress, setHospitalAddress] = useState('Loading...');
+  const [patientName, setPatientName] = useState('Loading...');
+  const [visitPurpose, setVisitPurpose] = useState('Loading...');
+  const [specialist, setSpecialist] = useState('Loading...');
+  const [doctor, setDoctor] = useState('Loading...');
+  const [patientNumber, setPatientNumber] = useState('Loading...');
+  const [currentNumber, setCurrentNumber] = useState('Loading...');
+  const [arriveTime, setArriveTime] = useState('Loading...');
+
+  useEffect(() => {
+    const setupInformation = async () => {
+      const data = await getQueueInformation();
+
+      setHospital(data.hospital);
+      setHospitalAddress(data.hospitalAddress);
+      setPatientName(data.patientName);
+      setVisitPurpose(data.visitPurpose);
+      setSpecialist(data.specialist);
+      setDoctor(data.doctor);
+      setPatientName(data.patientName);
+      setPatientNumber(data.patientNumber);
+      setCurrentNumber(data.currentNumber);
+      setArriveTime(data.arriveTime);
+    };
+    setupInformation();
+  }, []);
 
   return (
     <>
       <View style={Style.container}>
         <Card style={Style.customCard}>
           <Text style={Style.title}>Queue Information</Text>
-          <InformationBar label="Hospital" value="Pantai Hospital Penang" />
-          <InformationBar
-            label="Hospital Address"
-            value="82, Jalan Tengah, Bandar Bayan Baru, 11900 Bayan Lepas, Pulau Pinang"
-          />
-          <InformationBar label="Patient" value="Lim Siu Chun" />
-          <InformationBar
-            label="Visit Purpose"
-            value="Unknown Sharp Headache"
-          />
-          <InformationBar label="Specialist" value="Neurology" />
-          <InformationBar label="Doctor" value="Dr. Nassim Nicholas Taleb" />
+          <InformationBar label="Hospital" value={hospital} />
+          <InformationBar label="Hospital Address" value={hospitalAddress} />
+          <InformationBar label="Patient" value={patientName} />
+          <InformationBar label="Visit Purpose" value={visitPurpose} />
+          <InformationBar label="Specialist" value={specialist} />
+          <InformationBar label="Doctor" value={doctor} />
           <View style={Style.horizontalLine} />
-          <InformationBar label="Your Number" value="1033" />
-          <InformationBar label="Current Number" value="1022" />
-          <InformationBar label="Reach Before" value="3:22 pm" />
+          <InformationBar label="Your Number" value={patientNumber} />
+          <InformationBar label="Current Number" value={currentNumber} />
+          <InformationBar label="Reach Before" value={arriveTime} />
           <Text
             style={Style.cancelButton}
             onPress={() => {
