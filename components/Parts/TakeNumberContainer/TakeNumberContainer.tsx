@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {CuraColor} from '../../../util';
+import Firebase from '../../../util/firebase';
+import {connect, ConnectedProps} from 'react-redux';
+import {RootState} from '../../../store/reducers/rootReducer';
 
 import TakeNumberScreen from '../../takeNumberScreen/TakeNumberScreen';
 import QueueInformationScreen from '../../QueueInformationScreen/QueueInformationScreen';
@@ -8,12 +11,30 @@ import NumberInformationScreen from '../../NumberInformationScreen/NumberInforma
 
 const Stack = createStackNavigator();
 
-const TakeNumberContainer = () => {
-  const [takenNumber, setTakenNumber] = useState(true);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const TakeNumberContainer = (props: PropsFromRedux) => {
+  useEffect(() => {
+    const checkTakenNumber = async () => {
+      const userId = Firebase.auth().currentUser?.uid;
+
+      await Firebase.firestore()
+        .collection('queue')
+        .where('patientId', '==', userId)
+        .onSnapshot((docSnapshot) => {
+          if (docSnapshot.empty) {
+            props.cancelNumber();
+          } else {
+            props.takeNumber();
+          }
+        });
+    };
+    checkTakenNumber();
+  }, [props]);
 
   return (
     <Stack.Navigator initialRouteName="Take Number">
-      {takenNumber ? (
+      {props.takenNumber ? (
         <Stack.Screen
           name="Number Information"
           component={NumberInformationScreen}
@@ -44,4 +65,35 @@ const TakeNumberContainer = () => {
   );
 };
 
-export default TakeNumberContainer;
+// const checkQueue = async () => {
+//   const userId = Firebase.auth().currentUser?.uid;
+
+//   const queueRef = await Firebase.firestore()
+//     .collection('queue')
+//     .where('patientId', '==', userId)
+//     .onSnapshot((docSnapshot) => {
+//       if(docSnapshot.empty) {
+
+//       }
+//     });
+
+// };
+
+const mapState = (state: RootState) => {
+  return {
+    takenNumber: state.user.takenNumber,
+  };
+};
+
+const mapDispatch = {
+  takeNumber: () => ({
+    type: 'TAKE_NUMBER',
+  }),
+  cancelNumber: () => ({
+    type: 'CANCEL_NUMBER',
+  }),
+};
+
+const connector = connect(mapState, mapDispatch);
+
+export default connector(TakeNumberContainer);

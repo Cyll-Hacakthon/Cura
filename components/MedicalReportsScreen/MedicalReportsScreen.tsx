@@ -17,7 +17,6 @@ const MedicalReportsScreen = () => {
   useEffect(() => {
     const getMedicalReports = async () => {
       setMedicalReports(await retrieveMedicalReports());
-      console.log(await retrieveMedicalReports());
     };
 
     getMedicalReports();

@@ -1,9 +1,17 @@
-import {UserState, UserActionTypes, LOGIN, LOGOUT} from './types';
+import {
+  UserState,
+  UserActionTypes,
+  LOGIN,
+  LOGOUT,
+  TAKE_NUMBER,
+  CANCEL_NUMBER,
+} from './types';
 
 const initialUserState: UserState = {
   isLoggedIn: false,
   email: '',
   name: '',
+  takenNumber: false,
 };
 
 const UserReducer = (state = initialUserState, action: UserActionTypes) => {
@@ -20,6 +28,17 @@ const UserReducer = (state = initialUserState, action: UserActionTypes) => {
         isLoggedIn: false,
         email: '',
         name: '',
+        takenNumber: false,
+      };
+    case TAKE_NUMBER:
+      return {
+        ...state,
+        takenNumber: true,
+      };
+    case CANCEL_NUMBER:
+      return {
+        ...state,
+        takenNumber: false,
       };
     default:
       return state;
