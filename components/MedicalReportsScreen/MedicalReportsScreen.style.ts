@@ -9,7 +9,7 @@ const MedicalReportsScreenStyle = StyleSheet.create({
   },
   customCard: {
     width: '90%',
-    margin: 15,
+    marginBottom: 25,
     alignSelf: 'center',
   },
   cardTitle: {
@@ -46,6 +46,9 @@ const MedicalReportsScreenStyle = StyleSheet.create({
   },
   whiteWord: {
     color: 'white',
+  },
+  spacing: {
+    padding: 25,
   },
 });
 

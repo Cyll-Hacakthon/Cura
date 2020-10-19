@@ -1,5 +1,5 @@
 export type MedicalReportType = {
-  createdAt: {seconds: number; nanoseconds: number};
+  createdAt: string;
   doctorName: string;
   hospital: string;
   rx: string;

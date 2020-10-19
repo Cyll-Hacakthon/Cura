@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, ScrollView, Text} from 'react-native';
 import Style from './MedicalReportsScreen.style';
 import {MedicalReportType} from './MedicalReportType';
@@ -7,27 +7,52 @@ import {Feather} from '@expo/vector-icons';
 
 import Card from '../Parts/Card/Card';
 
+import {retrieveMedicalReports} from './functions';
+
 const MedicalReportsScreen = () => {
   const [medicalReports, setMedicalReports] = useState<
     MedicalReportType[] | null
   >(null);
 
+  useEffect(() => {
+    const getMedicalReports = async () => {
+      setMedicalReports(await retrieveMedicalReports());
+      console.log(await retrieveMedicalReports());
+    };
+
+    getMedicalReports();
+  }, []);
+
+  const loadMedicalReports = () => {
+    return medicalReports?.map((report, index) => {
+      return (
+        <ReportCard
+          date={report.createdAt}
+          doctor={report.doctorName}
+          hospital={report.hospital}
+          specialist={report.specialist}
+          title={report.title}
+          key={index}
+        />
+      );
+    });
+  };
+
   return (
     <>
       <ScrollView style={Style.container}>
-        {!medicalReports ? (
-          <ReportCard
-            title="Unknown Sharp Headache"
-            hospital="Pantai Hospital Penang"
-            specialist="Neurology"
-            doctor="Dr. Nassim Nicholas Taleb"
-            date="9 Oct 2020 3:30 pm"
-          />
+        {medicalReports ? (
+          medicalReports.length !== 0 ? (
+            loadMedicalReports()
+          ) : (
+            <Text style={Style.noReportsIndicator}>
+              No Reports Available Yet...
+            </Text>
+          )
         ) : (
-          <Text style={Style.noReportsIndicator}>
-            No Medical Reports Available Yet
-          </Text>
+          <Text style={Style.noReportsIndicator}>Loading...</Text>
         )}
+        <View style={Style.spacing} />
       </ScrollView>
       <View style={Style.searchButton}>
         <Text style={Style.whiteWord}>Search </Text>
