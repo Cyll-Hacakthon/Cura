@@ -3,7 +3,6 @@ import Firebase from '../../util/firebase';
 export type NotificationType = {
   category: string;
   content: string;
-  seen: boolean;
   sender: string;
   timestamp: Firebase.firestore.Timestamp;
   title: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Style from './NotificationItem.style';
 import {Feather} from '@expo/vector-icons';
 
@@ -8,7 +8,6 @@ type NotificationItemProps = {
   content: string;
   sender: string;
   timestamp: Date;
-  seen: boolean;
   category: string;
 };
 
@@ -17,7 +16,6 @@ const NotificationItem = ({
   content,
   sender,
   timestamp,
-  seen,
   category,
 }: NotificationItemProps) => {
   let selectedCategoryStyle;
@@ -37,21 +35,22 @@ const NotificationItem = ({
 
   formatTimestamp(timestamp);
   return (
-    <View style={Style.container}>
-      <View style={Style.horizontalWrap}>
-        <Text style={Style.title}>{title}</Text>
-        {!seen && <Text style={Style.newIndicator}>New</Text>}
-      </View>
-      <Text ellipsizeMode={'tail'} numberOfLines={2}>
-        {content}
-      </Text>
-      <View style={Style.horizontalWrap}>
-        <Text style={selectedCategoryStyle}>{sender}</Text>
-        <Text style={Style.time}>
-          <Feather name="clock" color="grey" /> {timestampDisplay}
+    <TouchableOpacity>
+      <View style={Style.container}>
+        <View style={Style.horizontalWrap}>
+          <Text style={Style.title}>{title}</Text>
+        </View>
+        <Text ellipsizeMode={'tail'} numberOfLines={2}>
+          {content}
         </Text>
+        <View style={Style.horizontalWrap}>
+          <Text style={selectedCategoryStyle}>{sender}</Text>
+          <Text style={Style.time}>
+            <Feather name="clock" color="grey" /> {timestampDisplay}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

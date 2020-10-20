@@ -35,7 +35,6 @@ const NotificationScreen = () => {
                 content={data.content}
                 sender={data.sender}
                 timestamp={timestamp}
-                seen={data.seen}
                 category={data.category}
               />
             );
