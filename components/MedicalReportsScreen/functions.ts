@@ -23,6 +23,7 @@ export const retrieveMedicalReports = async (): Promise<
     const data = doc.data();
 
     medicalReports.push({
+      id: doc.id,
       createdAt: formatTimestamp(data.createdAt.toDate()),
       doctorName: data.doctorName,
       hospital: data.hospital,

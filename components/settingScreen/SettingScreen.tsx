@@ -1,12 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect, ConnectedProps} from 'react-redux';
-import {View, Text, Image, Switch, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Style from './SettingScreen.style';
 import {CuraColor} from '../../util';
 import {Feather} from '@expo/vector-icons';
 import {RootState} from '../../store//reducers/rootReducer';
+import {RootStackParamList} from '../Parts/SettingContainer/RootStackParamList';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const userImage = require('../../assets/images/userProfileImage.jpg');
+
+type SettingScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Setting'
+>;
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -18,12 +25,16 @@ interface IOptionButtonBox {
   pressAction?: Function;
 }
 
-type SettingScreenProps = PropsFromRedux & {};
+type SettingScreenProps = PropsFromRedux & {
+  navigation: SettingScreenNavigationProp;
+};
 
-const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
-  const [trackingIsEnable, setTrackingEnable] = useState(false);
-  const toggleSwitch = () => setTrackingEnable((prevState) => !prevState);
-
+const SettingScreen = ({
+  email,
+  username,
+  logoutUser,
+  navigation,
+}: SettingScreenProps) => {
   const TopBox = () => {
     return (
       <View style={Style.topBox}>
@@ -97,8 +108,20 @@ const SettingScreen = ({email, username, logoutUser}: SettingScreenProps) => {
         <TopBox />
         <View style={Style.optionSelectionBox}>
           <MainButtonBox />
-          <OptionButtonBox iconName="user" boxTitle="Personal Information" />
-          <OptionButtonBox iconName="list" boxTitle="Healthcare Records" />
+          <OptionButtonBox
+            iconName="user"
+            boxTitle="Personal Information"
+            pressAction={() => {
+              navigation.navigate('TPersonal Info');
+            }}
+          />
+          <OptionButtonBox
+            iconName="list"
+            boxTitle="Healthcare Records"
+            pressAction={() => {
+              navigation.navigate('TMedical Reports');
+            }}
+          />
           <OptionButtonBox iconName="database" boxTitle="Data Management" />
           <OptionButtonBox
             iconName="x-square"

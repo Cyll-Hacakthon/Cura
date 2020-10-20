@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Modal} from 'react-native';
 import Style from './NumberInformationScreen.style';
 import {getQueueInformation} from './function';

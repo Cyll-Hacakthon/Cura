@@ -13,6 +13,15 @@ const MedicalReportsScreen = () => {
   const [medicalReports, setMedicalReports] = useState<
     MedicalReportType[] | null
   >(null);
+  const [selectedReport, setSelectedReport] = useState<MedicalReportType>();
+
+  const handleReportSelect = (reportId: string) => {
+    const filteredReports = medicalReports!?.filter((report) => {
+      return report.id === reportId;
+    });
+
+    setSelectedReport(filteredReports[0]);
+  };
 
   useEffect(() => {
     const getMedicalReports = async () => {
@@ -32,6 +41,7 @@ const MedicalReportsScreen = () => {
           specialist={report.specialist}
           title={report.title}
           key={index}
+          onPress={() => handleReportSelect(report.id)}
         />
       );
     });
@@ -81,6 +91,7 @@ type ReportCardProps = {
   specialist: string;
   doctor: string;
   date: string;
+  onPress: Function;
 };
 
 const ReportCard = ({
@@ -89,9 +100,10 @@ const ReportCard = ({
   specialist,
   doctor,
   date,
+  onPress,
 }: ReportCardProps) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => onPress()}>
       <Card style={Style.customCard}>
         <Text style={Style.cardTitle}>{title}</Text>
         <InformationBar label="Hospital" value={hospital} />

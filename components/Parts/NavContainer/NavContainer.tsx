@@ -7,7 +7,7 @@ import {CuraColor} from '../../../util';
 
 import HomeContainer from '../HomeContainer/HomeContainer';
 import ForumScreen from '../../forumScreen/ForumScreen';
-import SettingScreen from '../../settingScreen/SettingScreen';
+import SettingContainer from '../../Parts/SettingContainer/SettingContainer';
 import TakeNumberContainer from '../../Parts/TakeNumberContainer/TakeNumberContainer';
 import NotificationScreen from '../../notificationScreen/NotificationScreen';
 
@@ -19,7 +19,7 @@ const NavContainer = () => {
     {name: 'Forum', component: ForumScreen},
     {name: 'Take Number', component: TakeNumberContainer},
     {name: 'Notification', component: NotificationScreen}, // Change Component
-    {name: 'Setting', component: SettingScreen},
+    {name: 'Setting', component: SettingContainer},
   ];
 
   return (

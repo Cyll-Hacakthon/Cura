@@ -1,4 +1,5 @@
 export type MedicalReportType = {
+  id: string;
   createdAt: string;
   doctorName: string;
   hospital: string;
