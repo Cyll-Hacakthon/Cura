@@ -12,8 +12,6 @@ const NotificationScreen = () => {
     NotificationType
   > | null>([]);
 
-  const haveNotifications = notificationList && notificationList.length > 0;
-
   useEffect(() => {
     const retrieveNotifications = async () => {
       setNotificationList(await getNotificationList());
@@ -24,28 +22,32 @@ const NotificationScreen = () => {
 
   return (
     <View style={Style.container}>
-      {haveNotifications && notificationList ? (
-        <>
-          {notificationList.map((data, index) => {
-            const timestamp = new Date(data.timestamp.toDate());
-            return (
-              <NotificationItem
-                key={index}
-                title={data.title}
-                content={data.content}
-                sender={data.sender}
-                timestamp={timestamp}
-                category={data.category}
-              />
-            );
-          })}
-        </>
+      {notificationList ? (
+        notificationList.length !== 0 ? (
+          <>
+            {notificationList.map((data, index) => {
+              const timestamp = new Date(data.timestamp.toDate());
+              return (
+                <NotificationItem
+                  key={index}
+                  title={data.title}
+                  content={data.content}
+                  sender={data.sender}
+                  timestamp={timestamp}
+                  category={data.category}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <Text style={Style.noNotificationIndicator}>
+            <Feather name="smile" color="grey" size={15} />
+            {'  '}
+            You Have No Notifications To See.
+          </Text>
+        )
       ) : (
-        <Text style={Style.noNotificationIndicator}>
-          <Feather name="smile" color="grey" size={15} />
-          {'  '}
-          You Have No Notifications To See.
-        </Text>
+        <Text style={Style.noNotificationIndicator}>Loading...</Text>
       )}
     </View>
   );
