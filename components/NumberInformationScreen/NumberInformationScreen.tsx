@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Modal} from 'react-native';
 import Style from './NumberInformationScreen.style';
-import {getQueueInformation} from './function';
+import {getQueueInformation, cancelQueue} from './function';
 
 import Card from '../Parts/Card/Card';
 
 const NumberInformationScreen = () => {
   const [showModal, setShowModal] = useState(false);
+  const [queueId, setQueueId] = useState('');
   const [hospital, setHospital] = useState('Loading...');
   const [hospitalAddress, setHospitalAddress] = useState('Loading...');
   const [patientName, setPatientName] = useState('Loading...');
@@ -20,7 +21,9 @@ const NumberInformationScreen = () => {
   useEffect(() => {
     const setupInformation = async () => {
       const data = await getQueueInformation();
+      console.log(data);
 
+      setQueueId(data.queueId);
       setHospital(data.hospital);
       setHospitalAddress(data.hospitalAddress);
       setPatientName(data.patientName);
@@ -71,7 +74,13 @@ const NumberInformationScreen = () => {
                 }}>
                 Go Back
               </Text>
-              <Text style={Style.cancelButton}>Confirm </Text>
+              <Text
+                style={Style.cancelButton}
+                onPress={() => {
+                  cancelQueue(queueId);
+                }}>
+                Confirm{' '}
+              </Text>
             </View>
           </View>
         </View>

@@ -1,6 +1,7 @@
 import Firebase from '../../util/firebase';
 
 type QueueInformationType = {
+  queueId: string;
   hospital: string;
   hospitalAddress: string;
   patientName: string;
@@ -25,6 +26,7 @@ export const getQueueInformation = async (): Promise<QueueInformationType> => {
   const queueDateObject = data.arrivalTime.toDate();
 
   return {
+    queueId: queueDoc.docs[0].id,
     hospital: data.hospital,
     hospitalAddress: data.hospitalAddress,
     patientName: data.patientName,
@@ -47,4 +49,8 @@ const formatTimestamp = (timestamp: Date) => {
   const ampm = timestampHour > 11 ? 'pm' : 'am';
 
   return `${hour}:${minute} ${ampm}`;
+};
+
+export const cancelQueue = async (queueId: string) => {
+  await Firebase.firestore().collection('queue').doc(queueId).delete();
 };
