@@ -9,6 +9,7 @@ type NotificationItemProps = {
   sender: string;
   timestamp: Date;
   category: string;
+  onPress: Function;
 };
 
 const NotificationItem = ({
@@ -17,6 +18,7 @@ const NotificationItem = ({
   sender,
   timestamp,
   category,
+  onPress,
 }: NotificationItemProps) => {
   let selectedCategoryStyle;
   switch (category) {
@@ -33,9 +35,11 @@ const NotificationItem = ({
 
   const timestampDisplay = formatTimestamp(timestamp);
 
-  formatTimestamp(timestamp);
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => {
+        onPress();
+      }}>
       <View style={Style.container}>
         <View style={Style.horizontalWrap}>
           <Text style={Style.title}>{title}</Text>
