@@ -2,10 +2,11 @@ import React, {MediaHTMLAttributes, useEffect, useState} from 'react';
 import {View, ScrollView, Text, Modal} from 'react-native';
 import Style from './MedicalReportsScreen.style';
 import {MedicalReportType} from './MedicalReportType';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {Feather} from '@expo/vector-icons';
 
 import Card from '../Parts/Card/Card';
+import DatePicker from 'react-native-datepicker';
 
 import {retrieveMedicalReports} from './functions';
 import {create} from 'react-test-renderer';
@@ -18,6 +19,8 @@ const MedicalReportsScreen = () => {
     selectedReport,
     setSelectedReport,
   ] = useState<MedicalReportType | null>(null);
+
+  const [settingModalVisible, setSettingModalVisible] = useState(false);
 
   const handleReportSelect = (reportId: string) => {
     const filteredReports = medicalReports!?.filter((report) => {
@@ -68,7 +71,11 @@ const MedicalReportsScreen = () => {
         <View style={Style.spacing} />
       </ScrollView>
       <View style={Style.searchButton}>
-        <Text style={Style.whiteWord}>Search </Text>
+        <Text
+          style={Style.whiteWord}
+          onPress={() => setSettingModalVisible(true)}>
+          Search{' '}
+        </Text>
         <Feather name="search" size={20} color="white" />
       </View>
       {selectedReport && (
@@ -79,6 +86,12 @@ const MedicalReportsScreen = () => {
           }}
         />
       )}
+      <SearchSettingModal
+        visible={settingModalVisible}
+        closeModal={() => {
+          setSettingModalVisible(false);
+        }}
+      />
     </>
   );
 };
@@ -168,6 +181,65 @@ const IndividualReportModal = ({
         <Text style={Style.boldText}>Prescription</Text>
         <Text> </Text>
         <Text>{rx}</Text>
+      </View>
+    </Modal>
+  );
+};
+
+type InputBarProps = {
+  inputType: 'Text' | 'Date';
+  label: string;
+  placeholder?: string;
+};
+
+const InputBar = ({inputType, label, placeholder}: InputBarProps) => {
+  let inputComponent =
+    inputType === 'Text' ? (
+      <TextInput placeholder={placeholder} style={Style.inputStyle} />
+    ) : (
+      <DatePicker
+        androidMode="spinner"
+        date={'6-11-20'}
+        format="DD-MM-YYYY"
+        placeholder="Birthdate"
+        showIcon={false}
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{dateInput: Style.dateInputStyle}}
+      />
+    );
+
+  return (
+    <View style={Style.inputBarHorizontalWrap}>
+      <Text>{label}</Text>
+      {inputComponent}
+    </View>
+  );
+};
+
+type SearchSettingModalProps = {
+  closeModal: Function;
+  visible: boolean;
+};
+
+const SearchSettingModal = ({closeModal, visible}: SearchSettingModalProps) => {
+  return (
+    <Modal visible={visible}>
+      <Text
+        style={Style.modalCloseButton}
+        onPress={() => {
+          closeModal();
+        }}>
+        Close
+      </Text>
+      <View style={Style.settingModalContainer}>
+        <Text style={Style.reportModalTitle}>Search Setting</Text>
+        <InputBar inputType="Text" label="Title" />
+        <InputBar inputType="Text" label="Doctor" />
+        <InputBar inputType="Text" label="Hospital" />
+        <InputBar inputType="Date" label="From" />
+        <InputBar inputType="Date" label="To" />
+        <Text style={Style.modalSearchButton}>Search</Text>
       </View>
     </Modal>
   );

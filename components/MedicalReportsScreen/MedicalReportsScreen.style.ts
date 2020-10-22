@@ -80,6 +80,41 @@ const MedicalReportsScreenStyle = StyleSheet.create({
   boldText: {
     fontWeight: 'bold',
   },
+  settingModalContainer: {
+    paddingTop: 20,
+    paddingHorizontal: 15,
+  },
+  dateInputStyle: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingHorizontal: 8,
+    width: 250,
+    borderRadius: 10,
+    height: 40,
+  },
+  inputBarHorizontalWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+  },
+  inputStyle: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingHorizontal: 8,
+    width: 250,
+    borderRadius: 10,
+    height: 40,
+  },
+  modalSearchButton: {
+    backgroundColor: CuraColor.Green,
+    paddingVertical: 10,
+    textAlign: 'center',
+    color: 'white',
+    borderRadius: 10,
+    marginTop: 50,
+    marginHorizontal: 100,
+  },
 });
 
 export default MedicalReportsScreenStyle;
