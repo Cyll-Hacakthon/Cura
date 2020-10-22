@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, ScrollView, Text} from 'react-native';
+import React, {MediaHTMLAttributes, useEffect, useState} from 'react';
+import {View, ScrollView, Text, Modal} from 'react-native';
 import Style from './MedicalReportsScreen.style';
 import {MedicalReportType} from './MedicalReportType';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -8,12 +8,16 @@ import {Feather} from '@expo/vector-icons';
 import Card from '../Parts/Card/Card';
 
 import {retrieveMedicalReports} from './functions';
+import {create} from 'react-test-renderer';
 
 const MedicalReportsScreen = () => {
   const [medicalReports, setMedicalReports] = useState<
     MedicalReportType[] | null
   >(null);
-  const [selectedReport, setSelectedReport] = useState<MedicalReportType>();
+  const [
+    selectedReport,
+    setSelectedReport,
+  ] = useState<MedicalReportType | null>(null);
 
   const handleReportSelect = (reportId: string) => {
     const filteredReports = medicalReports!?.filter((report) => {
@@ -67,6 +71,14 @@ const MedicalReportsScreen = () => {
         <Text style={Style.whiteWord}>Search </Text>
         <Feather name="search" size={20} color="white" />
       </View>
+      {selectedReport && (
+        <IndividualReportModal
+          report={selectedReport}
+          onClose={() => {
+            setSelectedReport(null);
+          }}
+        />
+      )}
     </>
   );
 };
@@ -112,6 +124,52 @@ const ReportCard = ({
         <InformationBar label="Date" value={date} />
       </Card>
     </TouchableOpacity>
+  );
+};
+
+type IndividualReportModalType = {
+  report: MedicalReportType;
+  onClose: Function;
+};
+
+const IndividualReportModal = ({
+  onClose,
+  report,
+}: IndividualReportModalType) => {
+  const {
+    title,
+    hospital,
+    assessment,
+    createdAt,
+    doctorName,
+    rx,
+    specialist,
+  } = report;
+  return (
+    <Modal>
+      <View style={Style.individualReportContainer}>
+        <Text
+          style={Style.modalCloseButton}
+          onPress={() => {
+            onClose();
+          }}>
+          Close
+        </Text>
+        <Text style={Style.reportModalTitle}>{title}</Text>
+        <InformationBar label={'Hospital'} value={hospital} />
+        <InformationBar label={'Doctor'} value={doctorName} />
+        <InformationBar label={'Specialist'} value={specialist} />
+        <InformationBar label={'Visit Date'} value={createdAt} />
+        <View style={Style.horizontalLine} />
+        <Text style={Style.boldText}>Assessment</Text>
+        <Text> </Text>
+        <Text>{assessment}</Text>
+        <View style={Style.horizontalLine} />
+        <Text style={Style.boldText}>Prescription</Text>
+        <Text> </Text>
+        <Text>{rx}</Text>
+      </View>
+    </Modal>
   );
 };
 

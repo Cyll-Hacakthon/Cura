@@ -30,6 +30,7 @@ export const retrieveMedicalReports = async (): Promise<
       rx: data.rx,
       specialist: data.specialist,
       title: data.title,
+      assessment: data.assessment,
     });
   });
 
