@@ -54,6 +54,12 @@ const DataManagementScreen = () => {
           selectedHistory={selectedHistory}
         />
       )}
+      <View style={Style.searchButton}>
+        <Text style={Style.whiteText}>
+          <Feather name="search" />
+          Search
+        </Text>
+      </View>
     </>
   );
 };

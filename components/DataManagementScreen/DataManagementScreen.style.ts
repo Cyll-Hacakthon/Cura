@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {CuraColor} from '../../util';
 
 const DataManagementScreenStyle = StyleSheet.create({
   container: {
@@ -51,6 +52,20 @@ const DataManagementScreenStyle = StyleSheet.create({
   },
   gradientCustom: {
     justifyContent: 'flex-start',
+  },
+  searchButton: {
+    position: 'absolute',
+    right: 15,
+    bottom: 15,
+    justifyContent: 'space-between',
+    borderRadius: 10,
+    backgroundColor: CuraColor.Green,
+    padding: 5,
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+  },
+  whiteText: {
+    color: 'white',
   },
 });
 
