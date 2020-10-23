@@ -118,7 +118,7 @@ type ReportCardProps = {
   onPress: Function;
 };
 
-const ReportCard = ({
+export const ReportCard = ({
   title,
   hospital,
   specialist,
