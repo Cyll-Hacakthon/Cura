@@ -1,5 +1,6 @@
 export type RootStackParamList = {
   Setting: undefined;
-  'TMedical Reports': undefined;
-  'TPersonal Info': undefined;
+  'Medical Reports': undefined;
+  'Personal Info': undefined;
+  'Data Management': undefined;
 };

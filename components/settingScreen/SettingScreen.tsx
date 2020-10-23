@@ -112,17 +112,23 @@ const SettingScreen = ({
             iconName="user"
             boxTitle="Personal Information"
             pressAction={() => {
-              navigation.navigate('TPersonal Info');
+              navigation.navigate('Personal Info');
             }}
           />
           <OptionButtonBox
             iconName="list"
             boxTitle="Healthcare Records"
             pressAction={() => {
-              navigation.navigate('TMedical Reports');
+              navigation.navigate('Medical Reports');
             }}
           />
-          <OptionButtonBox iconName="database" boxTitle="Data Management" />
+          <OptionButtonBox
+            iconName="database"
+            boxTitle="Data Management"
+            pressAction={() => {
+              navigation.navigate('Data Management');
+            }}
+          />
           <OptionButtonBox
             iconName="x-square"
             iconColor="red"

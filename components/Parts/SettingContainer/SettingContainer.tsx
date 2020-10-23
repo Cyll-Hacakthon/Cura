@@ -6,6 +6,7 @@ import {CuraColor} from '../../../util';
 import SettingScreen from '../../settingScreen/SettingScreen';
 import PersonalInfoScreen from '../../PersonalInfoScreen/PersonalInfoScreen';
 import MedicalReportsScreen from '../../MedicalReportsScreen/MedicalReportsScreen';
+import DataManagementScreen from '../../DataManagementScreen/DataManagementScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ const SettingContainer = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="TMedical Reports"
+        name="Medical Reports"
         component={MedicalReportsScreen}
         options={{
           headerTintColor: 'white',
@@ -26,8 +27,16 @@ const SettingContainer = () => {
         }}
       />
       <Stack.Screen
-        name="TPersonal Info"
+        name="Personal Info"
         component={PersonalInfoScreen}
+        options={{
+          headerTintColor: 'white',
+          headerStyle: Style.greenBackground,
+        }}
+      />
+      <Stack.Screen
+        name="Data Management"
+        component={DataManagementScreen}
         options={{
           headerTintColor: 'white',
           headerStyle: Style.greenBackground,

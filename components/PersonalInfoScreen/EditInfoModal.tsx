@@ -185,7 +185,6 @@ const EditInfoModal = ({
               style={Style.confirmButton}
               onPress={() => {
                 handleSubmitInformation();
-                //updatePersonalInformation();
                 toggleVisible(false);
               }}>
               Confirm
