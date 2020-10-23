@@ -55,6 +55,15 @@ const EditInfoModal = ({
     nextId: info.disease.length,
     list: info.disease.map(listMapping),
   });
+  const [medicineLongTerm, setMedicineLongTerm] = useState({
+    nextId: info.medicineTaken.longTerm.length,
+    list: info.medicineTaken.longTerm.map(listMapping),
+  });
+
+  const [medicineRecent, setMedicineRecent] = useState({
+    nextId: info.medicineTaken.recent.length,
+    list: info.medicineTaken.recent.map(listMapping),
+  });
 
   const listFilterToValue = (element: {id: number; value: string}) => {
     return element.value;
@@ -86,6 +95,10 @@ const EditInfoModal = ({
       emergencyContact: emergencyContact.list.map(listFilterToValue),
       language: language.list.map(listFilterToValue),
       disease: disease.list.map(listFilterToValue),
+      medicineTaken: {
+        longTerm: medicineLongTerm.list.map(listFilterToValue),
+        recent: medicineRecent.list.map(listFilterToValue),
+      },
     };
   };
 
@@ -149,6 +162,16 @@ const EditInfoModal = ({
             label="Disease"
             values={disease}
             setValues={setDisease}
+          />
+          <MultipleInputBox
+            label="Long Term Medicine"
+            values={medicineLongTerm}
+            setValues={setMedicineLongTerm}
+          />
+          <MultipleInputBox
+            label="Recent Medicine"
+            values={medicineRecent}
+            setValues={setMedicineRecent}
           />
           <View style={Style.horizontalWrap}>
             <Text

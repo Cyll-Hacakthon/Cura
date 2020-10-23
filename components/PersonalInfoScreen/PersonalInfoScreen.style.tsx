@@ -70,6 +70,12 @@ const PersonalInfoScreenStyle = StyleSheet.create({
     borderColor: CuraColor.Green,
     borderWidth: 1,
   },
+  sectionTitle: {
+    textAlign: 'center',
+    marginVertical: 10,
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
 });
 
 export default PersonalInfoScreenStyle;

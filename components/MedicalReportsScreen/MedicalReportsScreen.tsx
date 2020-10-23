@@ -1,4 +1,4 @@
-import React, {MediaHTMLAttributes, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, ScrollView, Text, Modal} from 'react-native';
 import Style from './MedicalReportsScreen.style';
 import {MedicalReportType} from './MedicalReportType';
@@ -9,7 +9,6 @@ import Card from '../Parts/Card/Card';
 import DatePicker from 'react-native-datepicker';
 
 import {retrieveMedicalReports} from './functions';
-import {create} from 'react-test-renderer';
 
 const MedicalReportsScreen = () => {
   const [medicalReports, setMedicalReports] = useState<

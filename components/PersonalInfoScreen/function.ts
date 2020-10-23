@@ -1,5 +1,4 @@
 import Firebase from '../../util/firebase';
-import PersonalInfoScreenStyle from './PersonalInfoScreen.style';
 import {PersonalInfoType} from './PersonalInfoType';
 
 export const retrievePersonalInformation = async () => {
@@ -21,6 +20,7 @@ export const retrievePersonalInformation = async () => {
       emergencyContact: data.emergencyContact,
       language: data.language,
       disease: data.disease,
+      medicineTaken: data.medicineTaken,
     };
   } else {
     return {
@@ -33,6 +33,10 @@ export const retrievePersonalInformation = async () => {
       emergencyContact: '',
       language: '',
       disease: '',
+      medicineTaken: {
+        longTerm: [],
+        recent: [],
+      },
     };
   }
 };
@@ -51,6 +55,7 @@ export const updatePersonalInformation = (updatedInfo: PersonalInfoType) => {
     emergencyContact: updatedInfo.emergencyContact,
     language: updatedInfo.language,
     disease: updatedInfo.disease,
+    medicineTaken: updatedInfo.medicineTaken,
   };
 
   userRef.update(toBeSubmitted);
@@ -63,8 +68,6 @@ const calculateAge = (birthDateObjectSeconds: number) => {
   const birthdate: number = birthDateObject.getDate();
   const birthmonth: number = birthDateObject.getMonth() + 1;
   const birthyear: number = birthDateObject.getFullYear();
-
-  console.log('didi', birthyear, todayDate.getFullYear());
 
   let roughAgeYear = todayDate.getFullYear() - birthyear - 1;
 
