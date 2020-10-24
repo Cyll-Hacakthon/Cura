@@ -3,4 +3,5 @@ export type RootStackParamList = {
   'Medical Reports': undefined;
   'Personal Info': undefined;
   'Data Management': undefined;
+  'Follow Up Prescription': undefined;
 };

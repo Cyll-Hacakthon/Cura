@@ -7,6 +7,7 @@ import SettingScreen from '../../settingScreen/SettingScreen';
 import PersonalInfoScreen from '../../PersonalInfoScreen/PersonalInfoScreen';
 import MedicalReportsScreen from '../../MedicalReportsScreen/MedicalReportsScreen';
 import DataManagementScreen from '../../DataManagementScreen/DataManagementScreen';
+import FollowUpPrescriptionContainer from '../FollowUpPrescriptionContainer/FollowUpPrescriptionContainer';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,13 @@ const SettingContainer = () => {
         options={{
           headerTintColor: 'white',
           headerStyle: Style.greenBackground,
+        }}
+      />
+      <Stack.Screen
+        name="Follow Up Prescription"
+        component={FollowUpPrescriptionContainer}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

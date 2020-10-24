@@ -58,7 +58,10 @@ const SettingScreen = ({
           </View>
           <Text style={Style.mainButtonTitle}>Question</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Follow Up Prescription');
+          }}>
           <View style={Style.mainButton}>
             <Feather name="users" size={35} color="#ffffff" />
           </View>
