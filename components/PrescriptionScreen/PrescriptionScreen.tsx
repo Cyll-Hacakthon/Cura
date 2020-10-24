@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {ScrollView, View, Text} from 'react-native';
+import Style from './PrescriptionScreen.style';
+
+import PrescriptionItem from './PrescriptionItem';
 
 const PrescriptionScreen = () => {
   return (
-    <View>
-      <Text>This is Prescription Screen</Text>
-    </View>
+    <ScrollView style={Style.container}>
+      <PrescriptionItem />
+    </ScrollView>
   );
 };
 
