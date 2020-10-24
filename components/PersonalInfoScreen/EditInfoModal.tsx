@@ -56,13 +56,13 @@ const EditInfoModal = ({
     list: info.disease.map(listMapping),
   });
   const [medicineLongTerm, setMedicineLongTerm] = useState({
-    nextId: info.medicineTaken.longTerm.length,
-    list: info.medicineTaken.longTerm.map(listMapping),
+    nextId: info.longTermMed.length,
+    list: info.longTermMed.map(listMapping),
   });
 
   const [medicineRecent, setMedicineRecent] = useState({
-    nextId: info.medicineTaken.recent.length,
-    list: info.medicineTaken.recent.map(listMapping),
+    nextId: info.shortTermMed.length,
+    list: info.shortTermMed.map(listMapping),
   });
 
   const listFilterToValue = (element: {id: number; value: string}) => {
@@ -95,10 +95,6 @@ const EditInfoModal = ({
       emergencyContact: emergencyContact.list.map(listFilterToValue),
       language: language.list.map(listFilterToValue),
       disease: disease.list.map(listFilterToValue),
-      medicineTaken: {
-        longTerm: medicineLongTerm.list.map(listFilterToValue),
-        recent: medicineRecent.list.map(listFilterToValue),
-      },
     };
   };
 

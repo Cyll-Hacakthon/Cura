@@ -19,8 +19,6 @@ export type PersonalInfoType = {
   emergencyContact: Array<string>;
   language: Array<string>;
   disease: Array<string>;
-  medicineTaken: {
-    longTerm: Array<string>;
-    recent: Array<string>;
-  };
+  longTermMed: Array<string>;
+  shortTermMed: Array<string>;
 };

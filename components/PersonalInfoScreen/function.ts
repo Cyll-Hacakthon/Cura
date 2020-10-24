@@ -20,7 +20,10 @@ export const retrievePersonalInformation = async () => {
       emergencyContact: data.emergencyContact,
       language: data.language,
       disease: data.disease,
-      medicineTaken: data.medicineTaken,
+      longTermMed: data.longTermMed.map((medicine: any) => {
+        return medicine.medicine;
+      }),
+      shortTermMed: data.shortTermMed,
     };
   } else {
     return {
@@ -33,10 +36,8 @@ export const retrievePersonalInformation = async () => {
       emergencyContact: '',
       language: '',
       disease: '',
-      medicineTaken: {
-        longTerm: [],
-        recent: [],
-      },
+      longTermMed: [],
+      shortTermMed: [],
     };
   }
 };
@@ -55,7 +56,6 @@ export const updatePersonalInformation = (updatedInfo: PersonalInfoType) => {
     emergencyContact: updatedInfo.emergencyContact,
     language: updatedInfo.language,
     disease: updatedInfo.disease,
-    medicineTaken: updatedInfo.medicineTaken,
   };
 
   userRef.update(toBeSubmitted);

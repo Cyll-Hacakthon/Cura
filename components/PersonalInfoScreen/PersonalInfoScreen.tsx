@@ -29,10 +29,8 @@ const DummyData = {
   emergencyContact: [],
   language: [],
   disease: [],
-  medicineTaken: {
-    longTerm: [],
-    recent: [],
-  },
+  longTermMed: [],
+  shortTermMed: [],
 };
 
 const PersonalInfoScreen = () => {
@@ -77,14 +75,8 @@ const PersonalInfoScreen = () => {
           <InformationBar label="Language" info={[...info.language]} />
           <InformationBar label="Disease" info={[...info.disease]} />
           <Text style={Style.sectionTitle}>Medicine</Text>
-          <InformationBar
-            label="Long-Term"
-            info={[...info.medicineTaken.longTerm]}
-          />
-          <InformationBar
-            label="Recent"
-            info={[...info.medicineTaken.recent]}
-          />
+          <InformationBar label="Long-Term" info={info.longTermMed} />
+          <InformationBar label="Recent" info={info.shortTermMed} />
         </View>
       </ScrollView>
       <Text
