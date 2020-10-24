@@ -58,12 +58,12 @@ const SettingScreen = ({
           </View>
           <Text style={Style.mainButtonTitle}>Question</Text>
         </View>
-        <View>
+        <TouchableOpacity>
           <View style={Style.mainButton}>
             <Feather name="users" size={35} color="#ffffff" />
           </View>
           <Text style={Style.mainButtonTitle}>Follow-Up</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };
