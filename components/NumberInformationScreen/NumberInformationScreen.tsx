@@ -21,7 +21,6 @@ const NumberInformationScreen = () => {
   useEffect(() => {
     const setupInformation = async () => {
       const data = await getQueueInformation();
-      console.log(data);
 
       setQueueId(data.queueId);
       setHospital(data.hospital);

@@ -4,7 +4,7 @@ import {View, Text, TextInput} from 'react-native';
 import TakeNumberStackParamList from '../Parts/TakeNumberContainer/RootStackParamList';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
-import {getHospitalInformation} from './functions';
+import {getHospitalInformation, createQueue} from './functions';
 
 import TopBox from '../Parts/TopBox/TopBox';
 import Card from '../Parts/Card/Card';
@@ -124,7 +124,23 @@ const QueueInformationScreen = ({route}: QueueInformationProps) => {
           />
           <Text>I agree to Terms & Conditions</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            const selectedDoctorName: string = doctors[
+              `${selectedSpecialist}`
+            ].filter((doctor: any) => {
+              return doctor.value === selectedDoctor;
+            })[0].label;
+            createQueue({
+              doctor: selectedDoctorName,
+              hospitalName,
+              hospitalAddress,
+              specialist:
+                String(selectedSpecialist).charAt(0).toUpperCase() +
+                String(selectedSpecialist).slice(1),
+              visitPurpose,
+            });
+          }}>
           <View style={Style.buttonBox}>
             <Text style={Style.buttonText}>Take Number</Text>
           </View>

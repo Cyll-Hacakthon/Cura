@@ -134,6 +134,7 @@ const AccessHistoryInfoModal = (props: AccessHistoryInfoModalProps) => {
           doctor={report.doctorName}
           specialist={report.specialist}
           hospital={report.hospital}
+          onPress={() => {}}
         />
       );
     });

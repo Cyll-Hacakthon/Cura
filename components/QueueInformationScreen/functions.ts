@@ -55,3 +55,40 @@ const formatDoctorsList = async (doctorList: any) => {
 
   return doctorsMap;
 };
+
+type createQueueArgs = {
+  doctor: string;
+  hospitalName: string;
+  hospitalAddress: string;
+  specialist: string;
+  visitPurpose: string;
+};
+
+export const createQueue = async (info: createQueueArgs) => {
+  const dummyDate = new Date(2020, 9, 24, 15, 20);
+
+  const {
+    doctor,
+    hospitalName,
+    hospitalAddress,
+    specialist,
+    visitPurpose,
+  } = info;
+
+  const newQueueObject = {
+    accessNurse: true,
+    accessReception: true,
+    arrivalTime: Firebase.firestore.Timestamp.fromDate(dummyDate),
+    currentNumber: '1002',
+    doctor: doctor,
+    hospital: hospitalName,
+    hospitalAddress: hospitalAddress,
+    patientId: '6cBkI2rHZgfOWewRWzsB2QefO4Y2',
+    patientName: 'Lim Siu Chun',
+    patientNumber: '1023',
+    specialist: specialist,
+    visitPurpose: visitPurpose,
+  };
+
+  await Firebase.firestore().collection('queue').add(newQueueObject);
+};
