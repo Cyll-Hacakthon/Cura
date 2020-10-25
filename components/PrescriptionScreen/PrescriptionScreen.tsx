@@ -12,7 +12,7 @@ const PrescriptionScreen = () => {
 
   useEffect(() => {
     const retrievePrescriptionInfo = async () => {
-      setPrescriptionList(await getPrescriptionInfo());
+      getPrescriptionInfo(setPrescriptionList);
     };
 
     retrievePrescriptionInfo();
@@ -29,6 +29,8 @@ const PrescriptionScreen = () => {
                 limit={prescription.limit}
                 medicines={prescription.medicines}
                 title={prescription.title}
+                takenToday={prescription.takenToday}
+                id={prescription.id}
                 key={index}
               />
             );

@@ -3,23 +3,27 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import {CuraColor} from '../../util';
 
-import {PrescriptionType} from './function';
+import {PrescriptionType, updateDatabasePrescriptionTaken} from './function';
 
 const PrescriptionItem = (props: PrescriptionType) => {
   const [takeDrugModalVisible, setTakeDrugModalVisible] = useState(false);
 
-  const {dueDate, hospital, limit, medicines, title} = props;
+  const {dueDate, hospital, limit, medicines, title, takenToday, id} = props;
 
   return (
     <>
       <View style={Style.container}>
         <View style={Style.horizontalWrap}>
           <Text style={Style.title}>{hospital}</Text>
-          <Text
-            style={Style.takeDrugButton}
-            onPress={() => setTakeDrugModalVisible(true)}>
-            Take Now
-          </Text>
+          {takenToday ? (
+            <Text>Taken Today</Text>
+          ) : (
+            <Text
+              style={Style.takeDrugButton}
+              onPress={() => setTakeDrugModalVisible(true)}>
+              Take Now
+            </Text>
+          )}
         </View>
         <View style={Style.horizontalWrap}>
           <Text style={Style.info}>
@@ -48,6 +52,8 @@ const PrescriptionItem = (props: PrescriptionType) => {
         closeVisible={() => {
           setTakeDrugModalVisible(false);
         }}
+        id={id}
+        hospital={hospital}
       />
     </>
   );
@@ -122,25 +128,32 @@ const Style = StyleSheet.create({
 type TakeDrugModalProps = {
   visible: boolean;
   closeVisible: () => void;
+  id: string;
+  hospital: string;
 };
 
 const TakeDrugModal = (props: TakeDrugModalProps) => {
-  const {visible, closeVisible} = props;
+  const {visible, closeVisible, id, hospital} = props;
   return (
     <Modal visible={visible}>
       <View style={Style.centerDiv}>
         <Text style={Style.modalTitle}>
-          Confirm to take
-          <Text style={Style.bold}> Methylphenidate </Text>
-          from
-          <Text style={Style.bold}> Pantai Hospital Penang </Text>
+          Confirm to take prescriptions from
+          <Text style={Style.bold}> {hospital} </Text>
           today?
         </Text>
         <View style={{...Style.horizontalWrap, ...Style.buttonPanel}}>
           <Text style={Style.noButton} onPress={() => closeVisible()}>
             No
           </Text>
-          <Text style={Style.yesButton}>Yes</Text>
+          <Text
+            style={Style.yesButton}
+            onPress={() => {
+              updateDatabasePrescriptionTaken(id);
+              closeVisible();
+            }}>
+            Yes
+          </Text>
         </View>
       </View>
     </Modal>
