@@ -56,8 +56,8 @@ const EditInfoModal = ({
     list: info.disease.map(listMapping),
   });
   const [medicineLongTerm, setMedicineLongTerm] = useState({
-    nextId: info.longTermMed.length,
-    list: info.longTermMed.map(listMapping),
+    nextId: info.selfAddedLongTermMed.length,
+    list: info.selfAddedLongTermMed.map(listMapping),
   });
 
   const [medicineRecent, setMedicineRecent] = useState({

@@ -16,6 +16,10 @@ export const retrievePersonalInformation = async () => {
     });
   });
 
+  data?.selfAddedLongTermMed.map((medicine: string) => {
+    drugList.push(medicine);
+  });
+
   if (data) {
     return {
       age: calculateAge(data.birthdate.seconds),
@@ -29,6 +33,7 @@ export const retrievePersonalInformation = async () => {
       disease: data.disease,
       longTermMed: drugList,
       shortTermMed: data.shortTermMed,
+      selfAddedLongTermMed: data.selfAddedLongTermMed,
     };
   } else {
     return {
@@ -43,6 +48,7 @@ export const retrievePersonalInformation = async () => {
       disease: '',
       longTermMed: [],
       shortTermMed: [],
+      selfAddedLongTermMed: [],
     };
   }
 };

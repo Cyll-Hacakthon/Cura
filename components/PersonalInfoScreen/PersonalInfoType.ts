@@ -21,4 +21,5 @@ export type PersonalInfoType = {
   disease: Array<string>;
   longTermMed: Array<string>;
   shortTermMed: Array<string>;
+  selfAddedLongTermMed: Array<string>;
 };

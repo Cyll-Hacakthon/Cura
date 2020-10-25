@@ -31,6 +31,7 @@ const DummyData = {
   disease: [],
   longTermMed: [],
   shortTermMed: [],
+  selfAddedLongTermMed: [],
 };
 
 const PersonalInfoScreen = () => {
