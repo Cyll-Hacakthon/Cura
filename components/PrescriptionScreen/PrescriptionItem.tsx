@@ -3,29 +3,45 @@ import {Modal, StyleSheet, Text, View} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import {CuraColor} from '../../util';
 
-const PrescriptionItem = () => {
+import {PrescriptionType} from './function';
+
+const PrescriptionItem = (props: PrescriptionType) => {
   const [takeDrugModalVisible, setTakeDrugModalVisible] = useState(false);
+
+  const {dueDate, hospital, limit, medicines, title} = props;
 
   return (
     <>
       <View style={Style.container}>
         <View style={Style.horizontalWrap}>
-          <Text style={Style.title}>Methylphenidate</Text>
+          <Text style={Style.title}>{hospital}</Text>
           <Text
             style={Style.takeDrugButton}
             onPress={() => setTakeDrugModalVisible(true)}>
             Take Now
           </Text>
         </View>
+        <View style={Style.horizontalWrap}>
+          <Text style={Style.info}>
+            <Feather name="alert-circle" /> Due :{' '}
+            {formatTimestamp(dueDate.toDate())}
+          </Text>
+          <Text style={Style.info}>
+            <Feather name="hash" /> {limit} Takings Left
+          </Text>
+        </View>
         <Text style={Style.info}>
-          <Feather name="map-pin" /> Pantai Hospital Penang
+          <Feather name="bookmark" /> For :
+          <Text style={Style.bold}> {title}</Text>
         </Text>
-        <Text style={Style.info}>
-          <Feather name="alert-circle" /> Due : 13 Dec 2020
-        </Text>
-        <Text>
-          <Feather name="hash" /> 5 Takings Left
-        </Text>
+        <Text>Prescription : </Text>
+        {medicines.map((medicine, index) => {
+          return (
+            <Text key={index}>
+              <Feather name="chevron-right" /> {medicine}
+            </Text>
+          );
+        })}
       </View>
       <TakeDrugModal
         visible={takeDrugModalVisible}
@@ -44,6 +60,7 @@ const Style = StyleSheet.create({
     backgroundColor: 'white',
     paddingVertical: 8,
     paddingHorizontal: 18,
+    marginBottom: 18,
   },
   title: {
     fontWeight: 'bold',
@@ -57,6 +74,9 @@ const Style = StyleSheet.create({
   },
   info: {
     marginBottom: 5,
+  },
+  lastInfo: {
+    marginTop: 5,
   },
   takeDrugButton: {
     borderColor: CuraColor.DarkGreen,
@@ -125,4 +145,12 @@ const TakeDrugModal = (props: TakeDrugModalProps) => {
       </View>
     </Modal>
   );
+};
+
+const formatTimestamp = (timestamp: Date) => {
+  const date = timestamp.getDate();
+  const month = timestamp.toDateString().split(' ')[1];
+  const year = timestamp.getFullYear();
+
+  return `${date} ${month} ${year}`;
 };
