@@ -8,6 +8,13 @@ export const retrievePersonalInformation = async () => {
 
   const user = await userRef.get();
   const data = user.data();
+  const drugList: any[] = [];
+
+  data?.longTermMed.map((prescObject: any) => {
+    prescObject.medicines.map((medicine: any) => {
+      drugList.push(medicine);
+    });
+  });
 
   if (data) {
     return {
@@ -20,9 +27,7 @@ export const retrievePersonalInformation = async () => {
       emergencyContact: data.emergencyContact,
       language: data.language,
       disease: data.disease,
-      longTermMed: data.longTermMed.map((medicine: any) => {
-        return medicine.medicine;
-      }),
+      longTermMed: drugList,
       shortTermMed: data.shortTermMed,
     };
   } else {

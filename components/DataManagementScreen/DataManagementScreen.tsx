@@ -56,8 +56,7 @@ const DataManagementScreen = () => {
       )}
       <View style={Style.searchButton}>
         <Text style={Style.whiteText}>
-          <Feather name="search" />
-          Search
+          <Feather name="search" /> Search
         </Text>
       </View>
     </>

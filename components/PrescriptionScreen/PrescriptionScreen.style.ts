@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const PrescriptionScreenStyle = StyleSheet.create({
   container: {
-    paddingVertical: 15,
+    paddingVertical: 25,
   },
 });
 
