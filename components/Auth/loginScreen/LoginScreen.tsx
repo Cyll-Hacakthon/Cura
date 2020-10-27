@@ -86,6 +86,9 @@ const LoginScreen = (props: LoginScreenProps) => {
             <Text style={Style.signUpButton}>Sign Up!</Text>
           </TouchableOpacity>
         </View>
+        <View style={Style.signUpTextbar}>
+          <Text style={Style.signUpButton}>Forgot Password?</Text>
+        </View>
       </Card>
     </GradientBackground>
   );
