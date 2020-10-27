@@ -15,17 +15,21 @@ const NotificationScreenStyle = StyleSheet.create({
   modalTitle: {
     fontSize: 25,
     fontWeight: 'bold',
+    flex: 6,
+    marginBottom: 5,
   },
   modalCloseButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
+    // position: 'absolute',
+    // top: 10,
+    // right: 10,
     textAlign: 'center',
     paddingHorizontal: 8,
     paddingVertical: 5,
     backgroundColor: 'red',
     borderRadius: 10,
     color: 'white',
+    alignSelf: 'flex-start',
+    flex: 1,
   },
   modalContent: {
     marginTop: 15,
@@ -37,6 +41,9 @@ const NotificationScreenStyle = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#dedede',
     marginVertical: 15,
+  },
+  horizontalWrap: {
+    flexDirection: 'row',
   },
 });
 

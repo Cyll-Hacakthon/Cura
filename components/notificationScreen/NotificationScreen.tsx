@@ -68,7 +68,16 @@ const NotificationScreen = () => {
       {selectedNotification && (
         <Modal visible={true}>
           <View style={Style.modalContainer}>
-            <Text style={Style.modalTitle}>{selectedNotification.title}</Text>
+            <View style={Style.horizontalWrap}>
+              <Text style={Style.modalTitle}>{selectedNotification.title}</Text>
+              <Text
+                style={Style.modalCloseButton}
+                onPress={() => {
+                  setSelectedNotification(null);
+                }}>
+                Close
+              </Text>
+            </View>
             <Text>From : {selectedNotification.sender}</Text>
             <Text style={Style.modalTimestamp}>
               <Feather name="clock" color="grey" />{' '}
@@ -78,13 +87,6 @@ const NotificationScreen = () => {
             <Text>Message :</Text>
             <Text style={Style.modalContent}>
               {selectedNotification.content}
-            </Text>
-            <Text
-              style={Style.modalCloseButton}
-              onPress={() => {
-                setSelectedNotification(null);
-              }}>
-              Close
             </Text>
           </View>
         </Modal>
