@@ -95,6 +95,8 @@ const EditInfoModal = ({
       emergencyContact: emergencyContact.list.map(listFilterToValue),
       language: language.list.map(listFilterToValue),
       disease: disease.list.map(listFilterToValue),
+      selfAddedLongTermMed: medicineLongTerm.list.map(listFilterToValue),
+      shortTermMed: medicineRecent.list.map(listFilterToValue),
     };
   };
 
