@@ -17,11 +17,9 @@ const NotificationScreen = () => {
     setSelectedNotification,
   ] = useState<NotificationType | null>(null);
 
-  const [modalVisible, setModalVisible] = useState(false);
-
   useEffect(() => {
     const retrieveNotifications = async () => {
-      setNotificationList(await getNotificationList());
+      await getNotificationList(setNotificationList);
     };
 
     retrieveNotifications();

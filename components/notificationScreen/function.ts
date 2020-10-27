@@ -20,19 +20,26 @@ type UserType = {
   role: string;
 };
 
-export const getNotificationList = async (): Promise<
-  NotificationType[] | null
-> => {
-  const UserRef = Firebase.firestore()
+export const getNotificationList = async (setNotificationList: Function) => {
+  Firebase.firestore()
     .collection('users')
-    .doc(Firebase.auth().currentUser?.uid);
+    .doc(Firebase.auth().currentUser?.uid)
+    .onSnapshot((docSnap) => {
+      const notificationList = docSnap.data()?.notifications;
 
-  const user = await UserRef.get();
-  const userData = user.data();
-  if (userData) {
-    return userData.notifications;
-  }
-  return null;
+      let sortedNotificationList: NotificationType[] = notificationList.sort(
+        (a: NotificationType, b: NotificationType) => {
+          const aDate = a.timestamp.toDate();
+          const bDate = b.timestamp.toDate();
+
+          return Number(bDate) - Number(aDate);
+        },
+      );
+
+      sortedNotificationList = sortedNotificationList.slice(0, 11);
+
+      setNotificationList(sortedNotificationList);
+    });
 };
 
 export const formatTimestamp = (timestamp: Date) => {
