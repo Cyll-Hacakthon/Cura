@@ -64,7 +64,7 @@ export const updatePersonalInformation = (updatedInfo: PersonalInfoType) => {
     language: updatedInfo.language,
     disease: updatedInfo.disease,
     selfAddedLongTermMed: updatedInfo.selfAddedLongTermMed,
-    shortTermMed: updatedInfo.shortTermMed,
+    //shortTermMed: updatedInfo.shortTermMed,
   };
 
   userRef.update(toBeSubmitted);
