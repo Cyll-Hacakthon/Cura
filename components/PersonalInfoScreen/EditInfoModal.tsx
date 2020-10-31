@@ -162,7 +162,7 @@ const EditInfoModal = ({
             setValues={setDisease}
           />
           <MultipleInputBox
-            label="Long Term Medicine"
+            label="Personal Medicine"
             values={medicineLongTerm}
             setValues={setMedicineLongTerm}
           />

@@ -65,7 +65,8 @@ type createQueueArgs = {
 };
 
 export const createQueue = async (info: createQueueArgs) => {
-  const dummyDate = new Date(2020, 9, 24, 15, 20);
+  const currentDate = new Date();
+  const userId = Firebase.auth().currentUser?.uid;
 
   const {
     doctor,
@@ -78,17 +79,20 @@ export const createQueue = async (info: createQueueArgs) => {
   const newQueueObject = {
     accessNurse: true,
     accessReception: true,
-    arrivalTime: Firebase.firestore.Timestamp.fromDate(dummyDate),
+    arrivalTime: Firebase.firestore.Timestamp.fromDate(currentDate),
     currentNumber: '1002',
     doctor: doctor,
     hospital: hospitalName,
     hospitalAddress: hospitalAddress,
-    patientId: '6cBkI2rHZgfOWewRWzsB2QefO4Y2',
-    patientName: 'Lim Siu Chun',
+    patientId: userId,
+    name: 'Lim Siu Chun',
     patientNumber: '1023',
     specialist: specialist,
     visitPurpose: visitPurpose,
   };
 
-  await Firebase.firestore().collection('queue').add(newQueueObject);
+  await Firebase.firestore()
+    .collection('queue')
+    .doc(userId)
+    .set(newQueueObject);
 };

@@ -76,9 +76,18 @@ const PersonalInfoScreen = () => {
           <InformationBar label="Language" info={[...info.language]} />
           <InformationBar label="Disease" info={[...info.disease]} />
           <Text style={Style.sectionTitle}>Medicine</Text>
-          <InformationBar label="Long-Term" info={info.longTermMed} />
-          <InformationBar label="Recent" info={info.shortTermMed} />
-          <InformationBar label="Personal" info={info.selfAddedLongTermMed} />
+          <InformationBar
+            label="Long-Term Medicine Taken"
+            info={info.longTermMed}
+          />
+          <InformationBar
+            label="Recent Medicine Taken"
+            info={info.shortTermMed}
+          />
+          <InformationBar
+            label="Self-Added Medicine"
+            info={info.selfAddedLongTermMed}
+          />
         </View>
       </ScrollView>
       <Text

@@ -9,6 +9,12 @@ export const retrievePersonalInformation = async () => {
   const user = await userRef.get();
   const data = user.data();
   const drugList: any[] = [];
+  const tempWeightArray = data?.weight;
+  let sortedWeightArray;
+
+  sortedWeightArray = tempWeightArray.sort((a: any, b: any) => {
+    return a.value - b.value;
+  });
 
   data?.longTermMed.map((prescObject: any) => {
     prescObject.medicines.map((medicine: any) => {
@@ -20,7 +26,7 @@ export const retrievePersonalInformation = async () => {
     return {
       age: calculateAge(data.birthdate.seconds),
       bloodType: data.bloodType,
-      weight: data.weight,
+      weight: sortedWeightArray[0],
       height: data.height,
       allergy: data.allergy,
       disability: data.disabilities,
@@ -28,7 +34,7 @@ export const retrievePersonalInformation = async () => {
       language: data.language,
       disease: data.disease,
       longTermMed: drugList,
-      shortTermMed: data.shortTermMed,
+      shortTermMed: data.shortTermMed.medicine,
       selfAddedLongTermMed: data.selfAddedLongTermMed,
     };
   } else {
