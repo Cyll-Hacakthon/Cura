@@ -55,14 +55,22 @@ export const retrievePersonalInformation = async () => {
   }
 };
 
-export const updatePersonalInformation = (updatedInfo: PersonalInfoType) => {
+export const updatePersonalInformation = async (
+  updatedInfo: PersonalInfoType,
+) => {
   const userRef = Firebase.firestore()
     .collection('users')
     .doc(Firebase.auth().currentUser?.uid);
 
+  const userDoc = await userRef.get();
+
+  const weightArray = userDoc.data()?.weight;
+
+  weightArray.push(updatedInfo.weight);
+
   const toBeSubmitted = {
     bloodType: updatedInfo.bloodType,
-    weight: updatedInfo.weight,
+    weight: weightArray,
     height: updatedInfo.height,
     allergy: updatedInfo.allergy,
     disabilities: updatedInfo.disability,
@@ -70,7 +78,6 @@ export const updatePersonalInformation = (updatedInfo: PersonalInfoType) => {
     language: updatedInfo.language,
     disease: updatedInfo.disease,
     selfAddedLongTermMed: updatedInfo.selfAddedLongTermMed,
-    //shortTermMed: updatedInfo.shortTermMed,
   };
 
   userRef.update(toBeSubmitted);

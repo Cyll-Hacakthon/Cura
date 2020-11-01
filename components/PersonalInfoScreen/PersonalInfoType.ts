@@ -9,7 +9,7 @@ export type PersonalInfoType = {
   weight: {
     value: number;
     lastUpdated: Firebase.firestore.Timestamp;
-  };
+  }[];
   height: {
     value: number;
     lastUpdated: Firebase.firestore.Timestamp;

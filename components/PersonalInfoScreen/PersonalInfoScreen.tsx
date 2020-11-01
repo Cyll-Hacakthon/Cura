@@ -16,10 +16,12 @@ const DummyData = {
     value: 'loading',
     verified: false,
   },
-  weight: {
-    value: -1,
-    lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
-  },
+  weight: [
+    {
+      value: -1,
+      lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
+    },
+  ],
   height: {
     value: -1,
     lastUpdated: Firebase.firestore.Timestamp.fromDate(new Date()),
