@@ -17,7 +17,7 @@ export const retrievePersonalInformation = async () => {
   });
 
   data?.longTermMed.map((prescObject: any) => {
-    prescObject.medicines.map((medicine: any) => {
+    prescObject.medicine.map((medicine: any) => {
       drugList.push(medicine);
     });
   });
