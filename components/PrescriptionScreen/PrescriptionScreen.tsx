@@ -27,7 +27,7 @@ const PrescriptionScreen = () => {
                 dueDate={prescription.dueDate}
                 hospital={prescription.hospital}
                 limit={prescription.limit}
-                medicines={prescription.medicines}
+                medicine={prescription.medicine}
                 title={prescription.title}
                 takenToday={prescription.takenToday}
                 id={prescription.id}

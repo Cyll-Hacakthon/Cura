@@ -8,7 +8,7 @@ import {PrescriptionType, updateDatabasePrescriptionTaken} from './function';
 const PrescriptionItem = (props: PrescriptionType) => {
   const [takeDrugModalVisible, setTakeDrugModalVisible] = useState(false);
 
-  const {dueDate, hospital, limit, medicines, title, takenToday, id} = props;
+  const {dueDate, hospital, limit, medicine, title, takenToday, id} = props;
 
   return (
     <>
@@ -39,10 +39,10 @@ const PrescriptionItem = (props: PrescriptionType) => {
           <Text style={Style.bold}> {title}</Text>
         </Text>
         <Text>Prescription : </Text>
-        {medicines.map((medicine, index) => {
+        {medicine.map((medicineItem, index) => {
           return (
             <Text key={index}>
-              <Feather name="chevron-right" /> {medicine}
+              <Feather name="chevron-right" /> {medicineItem}
             </Text>
           );
         })}

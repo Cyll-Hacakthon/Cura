@@ -4,7 +4,7 @@ export type PrescriptionType = {
   dueDate: Firebase.firestore.Timestamp;
   hospital: string;
   limit: number;
-  medicines: string[];
+  medicine: string[];
   title: string;
   takenToday: boolean;
   id: string;
