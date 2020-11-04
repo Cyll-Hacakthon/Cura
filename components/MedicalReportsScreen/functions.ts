@@ -22,6 +22,8 @@ export const retrieveMedicalReports = async (): Promise<
   medicalReportsSnapshot.forEach((doc) => {
     const data = doc.data();
 
+    const planData = data.plan === '' ? 'None' : data.plan;
+
     medicalReports.push({
       id: doc.id,
       createdAt: formatTimestamp(data.createdAt.toDate()),
@@ -31,6 +33,7 @@ export const retrieveMedicalReports = async (): Promise<
       specialist: data.specialist,
       title: data.title,
       assessment: data.assessment,
+      plan: planData,
     });
   });
 

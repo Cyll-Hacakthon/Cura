@@ -7,4 +7,5 @@ export type MedicalReportType = {
   specialist: string;
   title: string;
   assessment: string;
+  plan: string;
 };

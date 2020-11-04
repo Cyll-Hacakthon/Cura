@@ -156,6 +156,7 @@ const IndividualReportModal = ({
     doctorName,
     rx,
     specialist,
+    plan,
   } = report;
   return (
     <Modal>
@@ -180,6 +181,10 @@ const IndividualReportModal = ({
         <Text style={Style.boldText}>Prescription</Text>
         <Text> </Text>
         <Text>{rx}</Text>
+        <View style={Style.horizontalLine} />
+        <Text style={Style.boldText}>Future Plan</Text>
+        <Text> </Text>
+        <Text>{plan}</Text>
       </View>
     </Modal>
   );
