@@ -31,6 +31,7 @@ const HospitalList = ({
           hospitalList?.map((hospital, index) => {
             return (
               <TouchableOpacity
+                key={index}
                 onPress={() => {
                   onHospitalTap(hospital);
                 }}>

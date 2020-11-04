@@ -45,8 +45,6 @@ export const getPrescriptionInfo = async (setPrescriptionList: Function) => {
             takenToday: isTaken,
           };
         });
-
-        console.log(prescriptionData);
       } else {
         prescriptionData = prescriptionData.map((presc: any) => {
           return {

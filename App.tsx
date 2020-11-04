@@ -50,7 +50,7 @@ const App = () => {
   const [loadFont] = useFonts(customFont);
   const [TimeFinishLoad, setTimeFinishLoad] = useState(false);
 
-  YellowBox.ignoreWarnings(['Setting a timer']);
+  YellowBox.ignoreWarnings(['']);
   useEffect(() => {
     setTimeout(() => {
       setTimeFinishLoad(true);
